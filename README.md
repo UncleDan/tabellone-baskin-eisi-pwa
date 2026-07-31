@@ -48,6 +48,8 @@ Il Tabellone Baskin EISI esiste in **due repository**, che lavorano insieme:
 
 ## Funzioni
 
+> 📋 Questa sezione è anche disponibile come guida autonoma, con icone e in tre lingue: [italiano](docs/guida-it.md) · [English](docs/guide-en.md) · [Français](docs/guide-fr.md). Nell'app è raggiungibile dal pulsante **Guida all'uso** nel menu `…`.
+
 **Schermata principale (modalità operativa)**
 - ▶️ avvia il tempo e diventa ⏸️; premendo ⏸️ il cronometro si ferma e torna ▶️ (anche con la barra spaziatrice).
 - A **fine tempo** (dopo la sirena automatica), accanto al play compare il pulsante **⏭ Periodo successivo**: con conferma avanza di un periodo (dopo il 4° parte `1TS`, `2TS`…) e riporta il cronometro al tempo pieno. Alla fine del **4° quarto** e di ogni **supplementare** viene proposto **solo in caso di parità** (altrimenti la partita è finita).
@@ -84,7 +86,12 @@ Il Tabellone Baskin EISI esiste in **due repository**, che lavorano insieme:
 - **Possesso** (sopra ai falli): in operativa un tap su una freccia accende quella e spegne l'altra; in impostazioni le frecce si accendono/spengono singolarmente (anche tutte spente).
 - **Bonus**: indicato da **pallini** (uno per squadra) accanto all'etichetta "Falli".
 
-Lo stato (punteggi, falli, timeout, tempo, nomi, impostazioni) viene salvato in locale **ad ogni comando** e anche quando l'app va in background o viene chiusa: in caso di chiusura imprevista o crash, alla riapertura si riprende esattamente da dove eri (a orologio fermo, per sicurezza, così basta premere ▶️ per ripartire). Anche le opzioni — conteggio falli, audio, schermo sempre acceso — vengono ricordate.
+**Lingua** (dal menu `…`)
+- L'app è disponibile in **italiano**, **inglese** e **francese**.
+- Alla prima apertura la lingua viene rilevata automaticamente dalla **lingua di sistema** del dispositivo; se non è tra le tre supportate, l'app parte in italiano.
+- Il pulsante **Lingua** nel menu `…` permette di forzare una lingua specifica (ciclo: *Sistema → Italiano → English → Français → Sistema…*), sovrascrivendo il rilevamento automatico. La scelta viene ricordata.
+
+Lo stato (punteggi, falli, timeout, tempo, nomi, impostazioni) viene salvato in locale **ad ogni comando** e anche quando l'app va in background o viene chiusa: in caso di chiusura imprevista o crash, alla riapertura si riprende esattamente da dove eri (a orologio fermo, per sicurezza, così basta premere ▶️ per ripartire). Anche le opzioni — conteggio falli, audio, schermo sempre acceso, lingua — vengono ricordate.
 
 ---
 
@@ -116,11 +123,16 @@ python3 -m http.server 8080
 tabellone-baskin-eisi/
 ├── README.md
 ├── .gitignore
+├── docs/
+│   ├── guida-it.md
+│   ├── guide-en.md
+│   └── guide-fr.md
 └── pwa/
     ├── index.html
     ├── manifest.webmanifest
     ├── service-worker.js
     ├── css/styles.css
+    ├── js/i18n.js
     ├── js/app.js
     ├── sounds/
     │   ├── horn.wav        (sirena - audio originale, CC0)
@@ -140,6 +152,7 @@ tabellone-baskin-eisi/
 - **Valori predefiniti** (minuti, periodi, timeout, bonus): oggetto `DEFAULT_CONFIG` in `pwa/js/app.js`.
 - **Aggiornamenti**: a ogni rilascio incrementa `CACHE_NAME` in `pwa/service-worker.js` (e la versione in `app.js`/manifest). Se aperta nel browser normale (non installata) si aggiorna da sola al ricaricamento; se installata come PWA non si aggiorna automaticamente (per non interrompere una partita in corso) e l'utente verifica da "Verifica aggiornamenti" nelle impostazioni, disinstallando e reinstallando l'app se ne trova una nuova.
 - **Compatibilità browser datati**: il layout usa `clamp()` per le dimensioni. Ogni dichiarazione ha un fallback fisso che la precede, così su motori privi di `clamp()` (Chrome < 79, WebView di sistema su Android 8/9) l'app resta usabile invece di mostrare loghi/icone a dimensione intrinseca. Mantenere questo schema (valore fisso prima, `clamp()` dopo) quando si aggiunge nuovo CSS dimensionale. Nota: su Chrome < 84 la spaziatura `gap` nei flexbox non è supportata, quindi alcuni elementi possono risultare più ravvicinati (degradazione solo estetica).
+- **Traduzioni**: dizionari in `pwa/js/i18n.js` (oggetto `I18N_DICT`, una chiave per lingua: `it`/`en`/`fr`). Per aggiungere una lingua: creare un nuovo blocco con le stesse chiavi di `it`, aggiungere il codice a `I18N_SUPPORTED`, e la nuova opzione comparirà automaticamente nel ciclo del pulsante **Lingua**. Il testo statico in `index.html` usa attributi `data-i18n`/`data-i18n-aria`/`data-i18n-placeholder`; il testo generato dinamicamente in `app.js` usa la funzione `t('chiave', {variabili})`.
 
 ---
 
@@ -305,4 +318,4 @@ Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub*
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
-**Versione:** 1.17.7
+**Versione:** 1.18.2

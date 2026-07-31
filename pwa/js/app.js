@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '1.17.7';
+const APP_VERSION = '1.18.2';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -105,7 +105,7 @@ function freshState(cfg){
     bonusActive: [false, false],  // bonus per squadra (modalita' 'teamFouls')
     possession: [false, false],   // freccia possesso: [sinistra, destra]
     toPhase: 'h1',           // fase a cui si riferisce timeoutsUsed
-    names: ['Squadra 1', 'Squadra 2'],
+    names: [t('default_team_name',{n:1}), t('default_team_name',{n:2})],
     colors: ['#ffffff', '#ffffff']   // colore della scritta nome, per squadra
   };
 }
@@ -418,7 +418,7 @@ const colorRows = [];
   inp.maxLength = 18;
   elName[i].insertAdjacentElement('afterend', inp);
   inp.addEventListener('input', ()=>{ state.names[i] = inp.value; saveState(); });
-  inp.addEventListener('blur', ()=>{ if(!inp.value.trim()){ inp.value = `Squadra ${i+1}`; state.names[i]=inp.value; saveState(); } });
+  inp.addEventListener('blur', ()=>{ if(!inp.value.trim()){ inp.value = t('default_team_name',{n:i+1}); state.names[i]=inp.value; saveState(); } });
   nameInputs.push(inp);
 
   // riga di scelta colore (visibile solo in modifica)
@@ -430,14 +430,14 @@ const colorRows = [];
     sw.className = 'swatch';
     sw.style.background = col;
     sw.dataset.color = col.toLowerCase();
-    sw.setAttribute('aria-label', 'Colore ' + col);
+    sw.setAttribute('aria-label', t('color_label', {color: col}));
     sw.addEventListener('click', ()=> setTeamColor(i, col));
     row.appendChild(sw);
   });
   const custom = document.createElement('input');
   custom.type = 'color';
   custom.className = 'swatch custom';
-  custom.setAttribute('aria-label', 'Colore personalizzato');
+  custom.setAttribute('aria-label', t('color_custom'));
   custom.addEventListener('input', ()=> setTeamColor(i, custom.value));
   row.appendChild(custom);
   inp.insertAdjacentElement('afterend', row);
@@ -566,7 +566,7 @@ function applyFoulMode(){
   body.classList.toggle('manual-fouls', !!state.config.manualFouls);
 }
 function updateFoulLabel(){
-  const el = $('#foulState'); if(el) el.textContent = state.config.manualFouls ? 'on' : 'off';
+  const el = $('#foulState'); if(el) el.textContent = state.config.manualFouls ? t('state_on') : t('state_off');
 }
 
 /* Bonus "ultimi 2'" (Baskin): negli ultimi 2' del 4° periodo e dei supplementari
@@ -727,7 +727,7 @@ function onTick(){
   if(rem <= 0){
     stopClock();
     if(state.config.autoHorn) horn();
-    toast('Fine tempo');
+    toast(t('toast_end_of_time'));
   }
 }
 
@@ -765,7 +765,7 @@ function tapTimeout(team){
   } else {
     // in OPERATIVA: il timeout si assegna solo a cronometro fermo
     if(state.running){
-      toast('Cronometro in movimento');   // niente fischio
+      toast(t('toast_clock_running'));   // niente fischio
       return;
     }
     // assegna solo se disponibile, altrimenti fischio + popup
@@ -779,7 +779,7 @@ function tapTimeout(team){
       }
     } else {
       whistle();
-      toast('Timeout non disponibile');
+      toast(t('toast_timeout_unavailable'));
       return;
     }
   }
@@ -801,7 +801,8 @@ function applyPeriod(p, resetTime){
   if(resetTime && !state.running){ state.remainingMs = periodFullMs(p); }
   renderAll();
   saveState();
-  const label = (p > state.config.periods) ? `Supplementare ${p - state.config.periods}TS` : `Periodo ${p}`;
+  const n = p - state.config.periods;
+  const label = (p > state.config.periods) ? t('toast_period_overtime', {n}) : t('toast_period_period', {n: p});
   toast(label);
 }
 
@@ -810,7 +811,7 @@ function resetClock(){
   state.remainingMs = periodFullMs(state.period);
   renderTimer();
   saveState();
-  toast('Tempo azzerato');
+  toast(t('toast_time_reset'));
 }
 
 function newGame(){
@@ -819,7 +820,7 @@ function newGame(){
   state.names = state.names || ['Squadra 1','Squadra 2'];
   renderAll();
   saveState();
-  toast('Nuova partita');
+  toast(t('toast_new_match'));
 }
 
 /* Reset della sola partita: azzera punteggi, falli, timeout, tempo e periodo,
@@ -832,7 +833,7 @@ function resetGame(){
   state = freshState(cfg);
   renderAll();
   saveState();
-  toast('Partita azzerata');
+  toast(t('toast_match_reset'));
 }
 
 /* =====================================================================
@@ -933,12 +934,12 @@ function enterEdit(){
 }
 function exitEdit(){
   // assicura nomi validi
-  for(let i=0;i<2;i++){ if(!state.names[i].trim()) state.names[i] = `Squadra ${i+1}`; }
+  for(let i=0;i<2;i++){ if(!state.names[i].trim()) state.names[i] = t('default_team_name',{n:i+1}); }
   body.classList.remove('mode-edit');
   body.classList.add('mode-game');
   renderAll();
   saveState();
-  toast('Modifiche salvate');
+  toast(t('toast_changes_saved'));
 }
 
 /* =====================================================================
@@ -1130,7 +1131,7 @@ function saveSettings(){
   state.config.baskinCamHost = ($('#cfgBaskinCamHost').value || '').trim();
   const tgt = state.config.baskinCamHost;
   if(state.config.baskinCamEnabled && tgt && !/^\d{1,3}(\.\d{1,3}){3}:\d{2,5}$/.test(tgt)){
-    toast('BaskinCam: formato consigliato IP:porta (es. 192.168.1.50:8080)');
+    toast(t('toast_baskincam_format'));
   }
   if(!state.config.manualFouls){ state.fouls = [0,0]; }   // falli off: azzera i contatori
   if(state.config.bonusMode !== 'teamFouls'){ state.bonusActive = [false,false]; }
@@ -1145,7 +1146,7 @@ function saveSettings(){
   updateFoulLabel();
   renderAll();
   saveState();
-  toast('Impostazioni salvate');
+  toast(t('toast_settings_saved'));
 }
 
 /* Reset applicazione: riporta TUTTO ai valori predefiniti (Baskin) */
@@ -1159,7 +1160,7 @@ function resetApp(){
   updateFoulLabel();
   renderAll();
   saveState();
-  toast('Applicazione azzerata');
+  toast(t('toast_app_reset'));
 }
 
 /* --- toast --- */
@@ -1180,7 +1181,7 @@ async function toggleWake(){
   wakeWanted = !wakeWanted;
   persistWake();
   if(wakeWanted) await acquireWake(); else releaseWake();
-  $('#wakeState').textContent = wakeWanted ? 'on' : 'off';
+  $('#wakeState').textContent = wakeWanted ? t('state_on') : t('state_off');
 }
 async function acquireWake(){
   try{
@@ -1221,7 +1222,7 @@ async function doInstall(){
     updateInstallButtons();
   } else {
     // browser senza supporto a beforeinstallprompt (es. iOS/Firefox) o gia' installata
-    toast('Usa il menu del browser: "Installa app" / "Aggiungi a schermata Home"');
+    toast(t('toast_use_browser_menu'));
   }
 }
 window.addEventListener('beforeinstallprompt', (e)=>{
@@ -1232,7 +1233,7 @@ window.addEventListener('beforeinstallprompt', (e)=>{
 window.addEventListener('appinstalled', ()=>{
   deferredPrompt = null;
   updateInstallButtons();
-  toast('App installata');
+  toast(t('toast_app_installed'));
 });
 
 /* =====================================================================
@@ -1242,11 +1243,11 @@ window.addEventListener('appinstalled', ()=>{
    ===================================================================== */
 async function checkForUpdates(){
   closeSheet('moreBackdrop');
-  if(!('serviceWorker' in navigator)){ toast('Aggiornamenti non disponibili'); return; }
+  if(!('serviceWorker' in navigator)){ toast(t('toast_updates_unavailable')); return; }
   let reg = null;
   try{ reg = await navigator.serviceWorker.getRegistration(); }catch(e){}
-  if(!reg){ toast('Service worker non attivo'); return; }
-  toast('Controllo aggiornamenti…');
+  if(!reg){ toast(t('toast_sw_inactive')); return; }
+  toast(t('toast_checking_updates'));
 
   // Confrontiamo direttamente la versione del file service-worker.js in rete
   // (bypassando la cache HTTP del browser) con quella attualmente attiva.
@@ -1259,21 +1260,21 @@ async function checkForUpdates(){
     const m = text.match(/CACHE_NAME\s*=\s*['"]([^'"]+)['"]/);
     if(m) remoteCacheName = m[1];
   }catch(e){
-    toast('Impossibile controllare: verifica la connessione');
+    toast(t('toast_check_network'));
     return;
   }
 
   const activeCacheName = `tabellone-baskin-eisi-v${APP_VERSION}`;
   if(!remoteCacheName){
-    toast('Impossibile controllare gli aggiornamenti');
+    toast(t('toast_check_failed'));
     return;
   }
   if(remoteCacheName !== activeCacheName){
     const remoteVersion = remoteCacheName.replace('tabellone-baskin-eisi-v', '');
-    toast(`Nuova versione disponibile (${remoteVersion}): disinstalla e reinstalla l'app per aggiornare`);
+    toast(t('toast_new_version', {version: remoteVersion}));
     return;
   }
-  toast(`Sei aggiornato (v${APP_VERSION})`);
+  toast(t('toast_up_to_date', {version: APP_VERSION}));
 }
 
 /* =====================================================================
@@ -1341,14 +1342,14 @@ onActivate($('#btnHorn'), ()=>{ ensureAudio(); horn(); });
 onActivate($('#btnWhistle'), ()=>{ ensureAudio(); whistle(); });
 
 function updateMuteLabel(){
-  const el = $('#muteState'); if(el) el.textContent = muted ? 'off' : 'on';
+  const el = $('#muteState'); if(el) el.textContent = muted ? t('state_off') : t('state_on');
 }
 function toggleMute(){
   muted = !muted;
   body.dataset.muted = muted ? 'true':'false';
   try{ localStorage.setItem(STORE_KEY+':muted', muted?'1':'0'); }catch(e){}
   updateMuteLabel();
-  toast(muted ? 'Suono disattivato' : 'Suono attivato');
+  toast(muted ? t('toast_sound_off') : t('toast_sound_on'));
 }
 
 function toggleManualFouls(){
@@ -1357,18 +1358,18 @@ function toggleManualFouls(){
   updateFoulLabel();
   renderAll();
   saveState();
-  toast(state.config.manualFouls ? 'Conteggio falli attivato' : 'Conteggio falli disattivato');
+  toast(state.config.manualFouls ? t('toast_manual_fouls_on') : t('toast_manual_fouls_off'));
 }
 
 function updateScoreColorLabel(){
-  const el = $('#scoreColorState'); if(el) el.textContent = state.config.scoreTeamColor ? 'on' : 'off';
+  const el = $('#scoreColorState'); if(el) el.textContent = state.config.scoreTeamColor ? t('state_on') : t('state_off');
 }
 function toggleScoreColor(){
   state.config.scoreTeamColor = !state.config.scoreTeamColor;
   updateScoreColorLabel();
   applyScoreColors();
   saveState();
-  toast(state.config.scoreTeamColor ? 'Punti nel colore squadra' : 'Punti verdi');
+  toast(state.config.scoreTeamColor ? t('toast_score_color_on') : t('toast_score_color_off'));
 }
 
 /* menu "..." (Informazioni + aggiornamenti) */
@@ -1396,20 +1397,28 @@ onActivate($('#baskinInfoClose'), ()=>{ closeSheet('baskinInfoBackdrop'); });
 
 onActivate($('#actScoreColor'), toggleScoreColor);
 onActivate($('#actMute'), toggleMute);
+onActivate($('#actLanguage'), ()=>{
+  // ciclo: Sistema -> Italiano -> English -> Français -> Sistema...
+  const cur = I18N.getPref();
+  const order = ['system', ...I18N.supported];
+  const next = order[(order.indexOf(cur) + 1) % order.length];
+  I18N.setPref(next);
+  location.reload();   // il modo più semplice e affidabile per riapplicare la lingua ovunque
+});
 onActivate($('#actSettings'), ()=>{ closeSheet('moreBackdrop'); openSettings(); });
 onActivate($('#actResetApp'), ()=>{
   closeSheet('moreBackdrop');
-  if(confirm('Reset applicazione: azzera punteggi, falli, timeout, possesso, nomi e riporta le impostazioni ai valori Baskin. Procedere?')) resetApp();
+  if(confirm(t('confirm_reset_app'))) resetApp();
 });
 
 /* chiudi l'applicazione (PWA): salva e prova a chiudere la finestra */
 onActivate($('#actQuit'), ()=>{
   closeSheet('moreBackdrop');
-  if(!confirm('Chiudere l\'applicazione?')) return;
+  if(!confirm(t('confirm_quit'))) return;
   saveState();
   try{ window.close(); }catch(e){}
   // se il browser blocca la chiusura (es. scheda normale), avvisa
-  setTimeout(()=>{ toast('Per uscire chiudi la finestra o la scheda'); }, 300);
+  setTimeout(()=>{ toast(t('toast_quit_hint')); }, 300);
 });
 
 /* link al repository del codice (apre nel browser) */
@@ -1426,6 +1435,16 @@ onActivate($('#actQuit'), ()=>{
   if(issues){
     issues.href = REPO_URL + '/issues';
     issues.addEventListener('click', ()=> closeSheet('moreBackdrop'));
+  }
+}
+/* link alla guida all'uso (file nel repo, uno per lingua): scelto in base alla
+   lingua attiva dell'app, non a quella del browser che l'apre */
+{
+  const guide = $('#actGuide');
+  if(guide){
+    const guideFile = { it: 'guida-it.md', en: 'guide-en.md', fr: 'guide-fr.md' }[I18N.getLang()] || 'guida-it.md';
+    guide.href = REPO_URL + '/blob/beta/docs/' + guideFile;
+    guide.addEventListener('click', ()=> closeSheet('moreBackdrop'));
   }
 }
 onActivate($('#actWake'), toggleWake);
@@ -1459,11 +1478,12 @@ onActivate($('#resetCancel'), ()=> closeSheet('resetBackdrop'));
 /* periodo successivo (accanto al play, a fine tempo) con conferma */
 function nextPeriodLabel(){
   const p = state.period + 1;
-  return (p > state.config.periods) ? `${p - state.config.periods}° tempo supplementare (${p - state.config.periods}TS)` : `${p}° periodo`;
+  const n = p - state.config.periods;
+  return (p > state.config.periods) ? t('overtime_label', {n}) : t('period_label', {n: p});
 }
 onActivate($('#btnNext'), ()=>{
   const tx = $('#nextText');
-  if(tx) tx.textContent = `Si passa al ${nextPeriodLabel()} e il cronometro viene riportato al tempo pieno.`;
+  if(tx) tx.textContent = t('next_text', {label: nextPeriodLabel()});
   openSheet('nextBackdrop');
 });
 onActivate($('#nextConfirm'), ()=>{ closeSheet('nextBackdrop'); applyPeriod(state.period + 1, true); });
@@ -1486,6 +1506,7 @@ function isTyping(e){ const t=e.target; return t && (t.tagName==='INPUT'||t.tagN
 /* =====================================================================
    AVVIO
    ===================================================================== */
+applyI18n();   // traduce l'HTML statico prima del primo render
 renderAll();
 
 /* mostra la versione reale nel menu "Informazioni" (evita disallineamenti:
@@ -1517,7 +1538,7 @@ if(DISPLAY_MODE){ initDisplayMode(); }
 
 /* ripristina le preferenze salvate (schermo sempre acceso) */
 {
-  const ws = $('#wakeState'); if(ws) ws.textContent = wakeWanted ? 'on' : 'off';
+  const ws = $('#wakeState'); if(ws) ws.textContent = wakeWanted ? t('state_on') : t('state_off');
   if(wakeWanted) acquireWake();
 }
 

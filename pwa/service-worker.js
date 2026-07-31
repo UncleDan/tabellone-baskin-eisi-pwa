@@ -14,12 +14,13 @@
    Aggiornare CACHE_NAME ad ogni rilascio: serve sia a invalidare la vecchia
    cache sia a far dichiarare al file la propria versione.
    ===================================================================== */
-const CACHE_NAME = 'tabellone-baskin-eisi-v1.17.7';
+const CACHE_NAME = 'tabellone-baskin-eisi-v1.18.2';
 
 const ASSETS = [
   './',
   './index.html',
   './css/styles.css',
+  './js/i18n.js',
   './js/app.js',
   './manifest.webmanifest',
   './sounds/horn.wav',
