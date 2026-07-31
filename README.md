@@ -1,4 +1,4 @@
-# Tabellone Baskin EISI
+# Tabellone Baskin EISI (PWA)
 
 ## Cos'è il Baskin
 
@@ -28,7 +28,7 @@ Due schermate:
 Tutto il display a 7 segmenti è disegnato in SVG: nessun font o file esterno, quindi funziona davvero offline.
 
 <p align="center">
-  <a href="https://uncledan.github.io/tabellone-baskin-eisi/pwa/"><img src="https://img.shields.io/badge/%E2%96%B6%20Apri%20la%20PWA-2962FF?style=for-the-badge&logoColor=white" alt="Apri la PWA"></a>
+  <a href="https://uncledan.github.io/tabellone-baskin-eisi-pwa/pwa/"><img src="https://img.shields.io/badge/%E2%96%B6%20Apri%20la%20PWA-2962FF?style=for-the-badge&logoColor=white" alt="Apri la PWA"></a>
 </p>
 
 ---
@@ -37,9 +37,9 @@ Tutto il display a 7 segmenti è disegnato in SVG: nessun font o file esterno, q
 
 Il Tabellone Baskin EISI esiste in **due repository**, che lavorano insieme:
 
-- **PWA (web)** — repo **[`tabellone-baskin-eisi`](https://github.com/UncleDan/tabellone-baskin-eisi)** *(questo)*:
+- **PWA (web)** — repo **[`tabellone-baskin-eisi-pwa`](https://github.com/UncleDan/tabellone-baskin-eisi-pwa)** *(questo)*:
   il segnapunti web di questa pagina, installabile e offline.
-- **App Android (Cast)** — repo **[`tabellone-baskin-cast`](https://github.com/UncleDan/tabellone-baskin-cast)** *(work in progress)*:
+- **App Android (Cast)** — **Tabellone Baskin EISI (Cast)**, repo **[`tabellone-baskin-eisi-cast`](https://github.com/UncleDan/tabellone-baskin-eisi-cast)** *(work in progress)*:
   incorpora questa stessa PWA e aggiunge la presentazione su TV (display
   secondario HDMI/Miracast o LAN). Questa PWA, in modalità `?display=1`, fa anche
   da **schermo via browser** per quell'app.
@@ -74,7 +74,7 @@ python3 -m http.server 8080
 ## Struttura
 
 ```
-tabellone-baskin-eisi/
+tabellone-baskin-eisi-pwa/
 ├── README.md
 ├── .gitignore
 ├── docs/
@@ -104,7 +104,7 @@ tabellone-baskin-eisi/
 
 - **Colori**: variabili `--green`, `--red`, `--yellow` in `pwa/css/styles.css`.
 - **Valori predefiniti** (minuti, periodi, timeout, bonus): oggetto `DEFAULT_CONFIG` in `pwa/js/app.js`.
-- **Aggiornamenti**: a ogni rilascio incrementa `CACHE_NAME` in `pwa/service-worker.js` (e la versione in `app.js`/manifest). Se aperta nel browser normale (non installata) si aggiorna da sola al ricaricamento; se installata come PWA non si aggiorna automaticamente (per non interrompere una partita in corso) e l'utente verifica da "Verifica aggiornamenti" nelle impostazioni, disinstallando e reinstallando l'app se ne trova una nuova.
+- **Aggiornamenti**: a ogni rilascio incrementa `CACHE_NAME` in `pwa/service-worker.js` e `APP_VERSION` in `pwa/js/app.js` (versionamento per anno: `2026`, poi `2026a`, `2026b`, `2026c`… per i rilasci successivi nello stesso anno). Se aperta nel browser normale (non installata) si aggiorna da sola al ricaricamento; se installata come PWA non si aggiorna automaticamente (per non interrompere una partita in corso) e l'utente verifica da "Verifica aggiornamenti" nelle impostazioni, disinstallando e reinstallando l'app se ne trova una nuova.
 - **Compatibilità browser datati**: il layout usa `clamp()` per le dimensioni. Ogni dichiarazione ha un fallback fisso che la precede, così su motori privi di `clamp()` (Chrome < 79, WebView di sistema su Android 8/9) l'app resta usabile invece di mostrare loghi/icone a dimensione intrinseca. Mantenere questo schema (valore fisso prima, `clamp()` dopo) quando si aggiunge nuovo CSS dimensionale. Nota: su Chrome < 84 la spaziatura `gap` nei flexbox non è supportata, quindi alcuni elementi possono risultare più ravvicinati (degradazione solo estetica).
 - **Traduzioni**: dizionari in `pwa/js/i18n.js` (oggetto `I18N_DICT`, una chiave per lingua: `it`/`en`/`fr`). Per aggiungere una lingua: creare un nuovo blocco con le stesse chiavi di `it`, aggiungere il codice a `I18N_SUPPORTED`, e la nuova opzione comparirà automaticamente nel ciclo del pulsante **Lingua**. Il testo statico in `index.html` usa attributi `data-i18n`/`data-i18n-aria`/`data-i18n-placeholder`; il testo generato dinamicamente in `app.js` usa la funzione `t('chiave', {variabili})`.
 
@@ -120,13 +120,13 @@ lettura, adatta a un secondo schermo o a un TV.
 - In questa modalità l'app **non modifica né salva** la partita: è un puro
   visualizzatore.
 - Lo stato arriva dall'esterno: se la pagina è servita da un web server con
-  endpoint `GET /state` (come nell'app *Tabellone Baskin Cast*), il display fa
+  endpoint `GET /state` (come nell'app *Tabellone Baskin EISI (Cast)*), il display fa
   **polling** ogni ~0,75 s; il cronometro scorre comunque fluido perché il tempo
   viene fatto avanzare in locale tra un aggiornamento e l'altro.
 - È disponibile anche `window.applyDisplayState(json)` per aggiornare il display
   con un push diretto (usato dal wrapper Android tramite un display secondario).
 
-Questa modalità è la base dell'app **[Tabellone Baskin Cast](https://github.com/UncleDan/tabellone-baskin-cast)**
+Questa modalità è la base dell'app **[Tabellone Baskin EISI (Cast)](https://github.com/UncleDan/tabellone-baskin-eisi-cast)**
 (progetto Android separato, **work in progress**) che presenta il tabellone su un
 TV via **display secondario (HDMI/Miracast)** o via **LAN** (browser del TV).
 
@@ -272,4 +272,4 @@ Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub*
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
-**Versione:** 1.19.0
+**Versione:** 2026

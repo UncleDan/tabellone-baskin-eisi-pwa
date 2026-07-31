@@ -57,4 +57,4 @@ L'état du match est enregistré **après chaque action**, même si l'applicatio
 
 ---
 
-📄 Retour au [README](../README.md) · 🐞 [Signaler un problème](https://github.com/UncleDan/tabellone-baskin-eisi/issues)
+📄 Retour au [README](../README.md) · 🐞 [Signaler un problème](https://github.com/UncleDan/tabellone-baskin-eisi-pwa/issues)

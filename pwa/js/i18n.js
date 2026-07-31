@@ -1,5 +1,5 @@
 /* =====================================================================
-   Tabellone Baskin EISI - internazionalizzazione (it / en / fr)
+   Tabellone Baskin EISI (PWA) - internazionalizzazione (it / en / fr)
    Deve essere caricato PRIMA di app.js: espone window.I18N (funzioni
    t/getLang/setLang/applyI18n) usate sia dall'HTML (data-i18n-*) sia
    dal codice applicativo (toast, etichette dinamiche).

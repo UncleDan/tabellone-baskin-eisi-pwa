@@ -1,6 +1,6 @@
 {
-  "name": "Tabellone Baskin EISI",
-  "short_name": "Tabellone Baskin EISI",
+  "name": "Tabellone Baskin EISI (PWA)",
+  "short_name": "Tabellone Baskin EISI (PWA)",
   "description": "Tabellone segnapunti per il Baskin: tempo, punti, timeout e bonus. Funziona offline.",
   "lang": "it",
   "start_url": "./index.html",
