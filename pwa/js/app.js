@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '1.18.2';
+const APP_VERSION = '1.19.0';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -41,18 +41,20 @@ const DEFAULT_CONFIG = {
   scoreTeamColor: false, // punteggio nel colore della squadra (default: verde)
   resetFoulsEachPeriod: true,
   autoHorn: true,
+  autoWhistleTimeout: true, // fischio automatico se si tocca un timeout non disponibile
   baskinCamEnabled: false, // streaming stato verso dispositivo companion BaskinCam
   baskinCamHost: '',       // IP:porta del BaskinCam (es. 192.168.1.50:8080), vuoto = disattivo
   configMode: 'baskin'     // preset attivo: 'baskin' | 'custom' (governa i campi modificabili)
 };
 
 /* Preset di disciplina: il pulsante "Baskin" reimposta i campi di gara a questi
-   valori (le opzioni personali come scoreTeamColor non cambiano). */
+   valori (le opzioni personali come scoreTeamColor non cambiano). Sirena e
+   fischio automatico NON sono qui: restano personalizzabili in ogni modalità. */
 const PRESET_BASKIN = {
   minutes: 8, overtimeMinutes: 4, periods: 4,
   timeoutMode: 'baskin', timeoutsPerHalf: 2, timeoutsOvertime: 1,
   bonusMode: 'last2', bonus: 5, manualFouls: false, possession: false,
-  resetFoulsEachPeriod: true, autoHorn: true
+  resetFoulsEachPeriod: true
 };
 
 /* Durata (minuti / ms) del periodo indicato: i periodi oltre quelli
@@ -83,9 +85,11 @@ function timeoutPool(period){
   return (period > c.periods) ? c.timeoutsOvertime : c.timeoutsPerHalf;
 }
 
-/* Siamo negli ultimi 2 minuti dell'ultimo periodo regolamentare? (regola Basket) */
+/* Siamo negli ultimi 2 minuti dell'ultimo periodo regolamentare o di un
+   supplementare? (regola Basket/bonus "ultimi 2'": vale per il 4° quarto e
+   per ogni supplementare, non solo per il periodo regolamentare finale) */
 function inLastTwoMinutes(){
-  return state.period === state.config.periods && state.remainingMs < 120000;
+  return state.period >= state.config.periods && state.remainingMs < 120000;
 }
 
 /* ---------- Stato della partita ---------- */
@@ -106,6 +110,7 @@ function freshState(cfg){
     possession: [false, false],   // freccia possesso: [sinistra, destra]
     toPhase: 'h1',           // fase a cui si riferisce timeoutsUsed
     names: [t('default_team_name',{n:1}), t('default_team_name',{n:2})],
+    namesCustom: [false, false],    // true se il nome è stato personalizzato dall'utente
     colors: ['#ffffff', '#ffffff']   // colore della scritta nome, per squadra
   };
 }
@@ -147,6 +152,13 @@ function loadState(){
       }
       s.running = false;            // non si riprende mai "in corsa"
       if(!Array.isArray(s.names)) s.names = ['Squadra 1','Squadra 2'];
+      // migrazione: namesCustom assente -> dedotto controllando se il nome
+      // salvato è uno dei default noti in una qualsiasi delle lingue supportate
+      // (se sì, resta "non personalizzato" e continuerà a tradursi da solo)
+      if(!Array.isArray(s.namesCustom)){
+        const knownDefaults = [1,2].map(n => I18N_SUPPORTED.map(l => I18N_DICT[l].default_team_name.replace('{n}', n)));
+        s.namesCustom = [0,1].map(i => !knownDefaults[i].includes((s.names[i]||'').trim()));
+      }
       if(!Array.isArray(s.colors)) s.colors = ['#ffffff','#ffffff'];
       if(!Array.isArray(s.timeoutsUsed)) s.timeoutsUsed = [0,0];
       if(!Array.isArray(s.timeoutsLate)) s.timeoutsLate = [0,0];
@@ -158,6 +170,12 @@ function loadState(){
     }
   }catch(e){ /* ignora */ }
   return freshState(DEFAULT_CONFIG);
+}
+/* Nome squadra da mostrare: se non personalizzato, sempre il default TRADOTTO
+   nella lingua corrente (si aggiorna da solo cambiando lingua); se personalizzato,
+   il testo scelto dall'utente. */
+function getTeamName(i){
+  return state.namesCustom[i] ? state.names[i] : t('default_team_name', {n: i+1});
 }
 /* variante di phaseKey utilizzabile prima che 'state' sia assegnato */
 function phaseKeyFor(s, period){
@@ -206,7 +224,7 @@ function costruisciPayloadStato(){
     timeoutsUsed: state.timeoutsUsed,
     bonusActive: state.bonusActive,
     possession: state.possession,
-    names: state.names,
+    names: [getTeamName(0), getTeamName(1)],
     colors: state.colors,
     config: {
       periodsRegular: cfg.periods,
@@ -417,8 +435,8 @@ const colorRows = [];
   inp.className = 'team-name-input';
   inp.maxLength = 18;
   elName[i].insertAdjacentElement('afterend', inp);
-  inp.addEventListener('input', ()=>{ state.names[i] = inp.value; saveState(); });
-  inp.addEventListener('blur', ()=>{ if(!inp.value.trim()){ inp.value = t('default_team_name',{n:i+1}); state.names[i]=inp.value; saveState(); } });
+  inp.addEventListener('input', ()=>{ state.names[i] = inp.value; state.namesCustom[i] = true; saveState(); });
+  inp.addEventListener('blur', ()=>{ if(!inp.value.trim()){ state.namesCustom[i] = false; inp.value = getTeamName(i); state.names[i] = inp.value; saveState(); } });
   nameInputs.push(inp);
 
   // riga di scelta colore (visibile solo in modifica)
@@ -548,8 +566,8 @@ function renderAll(){
     renderNumber(elFoul[i], state.fouls[i]);
     elFoul[i].classList.toggle('limit', state.fouls[i] >= state.config.bonus);
     renderTimeouts(i);
-    elName[i].textContent = state.names[i];
-    nameInputs[i].value = state.names[i];
+    elName[i].textContent = getTeamName(i);
+    nameInputs[i].value = getTeamName(i);
   }
   updateBonus();
   renderPossession();
@@ -778,7 +796,7 @@ function tapTimeout(team){
         state.timeoutsLate[team] += 1;
       }
     } else {
-      whistle();
+      if(state.config.autoWhistleTimeout) whistle();
       toast(t('toast_timeout_unavailable'));
       return;
     }
@@ -933,8 +951,8 @@ function enterEdit(){
   renderAll();   // ridisegna i pallini timeout senza lo stato "bloccato"
 }
 function exitEdit(){
-  // assicura nomi validi
-  for(let i=0;i<2;i++){ if(!state.names[i].trim()) state.names[i] = t('default_team_name',{n:i+1}); }
+  // assicura nomi validi: se vuoto, torna al default (auto-tradotto)
+  for(let i=0;i<2;i++){ if(!state.names[i].trim()){ state.names[i] = t('default_team_name',{n:i+1}); state.namesCustom[i] = false; } }
   body.classList.remove('mode-edit');
   body.classList.add('mode-game');
   renderAll();
@@ -1053,7 +1071,9 @@ let pendingTimeoutMode = 'baskin';
 let pendingMode = 'baskin';   // modalità selezionata nel form: 'baskin' | 'custom'
 
 /* Campi "parametri di gara": abilitati SOLO in modalità Personalizza */
-const DISCIPLINE_FIELDS = ['#cfgMinutes','#cfgPeriods','#cfgOvertime','#cfgTimeoutsHalf','#cfgTimeoutsOt','#cfgTimeoutMode','#cfgBonusMode','#cfgBonus','#cfgFouls','#cfgResetFouls','#cfgPossession','#cfgAutoHorn'];
+const DISCIPLINE_FIELDS = ['#cfgMinutes','#cfgPeriods','#cfgOvertime','#cfgTimeoutsHalf','#cfgTimeoutsOt','#cfgTimeoutMode','#cfgBonusMode','#cfgBonus','#cfgFouls','#cfgResetFouls','#cfgPossession'];
+// Nota: #cfgAutoHorn e #cfgAutoWhistleTimeout NON sono qui apposta: restano
+// sempre modificabili, anche in modalità Baskin (non fanno parte della disciplina).
 
 function setDisciplineFieldsEnabled(enabled){
   DISCIPLINE_FIELDS.forEach(sel=>{ const el = $(sel); if(el) el.disabled = !enabled; });
@@ -1086,6 +1106,7 @@ function fillSettingsForm(c){
   $('#cfgResetFouls').checked = !!c.resetFoulsEachPeriod;
   $('#cfgFouls').checked = !!c.manualFouls;
   $('#cfgPossession').checked = !!c.possession;
+  $('#cfgAutoWhistleTimeout').checked = !!c.autoWhistleTimeout;
   $('#cfgAutoHorn').checked = !!c.autoHorn;
   $('#cfgBaskinCam').checked = !!c.baskinCamEnabled;
   $('#cfgBaskinCamHost').value = c.baskinCamHost || '';
@@ -1121,11 +1142,14 @@ function saveSettings(){
     state.config.resetFoulsEachPeriod = $('#cfgResetFouls').checked;
     state.config.manualFouls = $('#cfgFouls').checked;
     state.config.possession = $('#cfgPossession').checked;
-    state.config.autoHorn = $('#cfgAutoHorn').checked;
     const tm = $('#cfgTimeoutMode').value;
     state.config.timeoutMode = (tm === 'basket') ? 'basket' : 'baskin';
     state.config.configMode = 'custom';
   }
+  // Sirena e fischio automatico: sempre dai campi, in ogni modalità (non fanno
+  // parte della disciplina Baskin/Basket, restano sempre personalizzabili)
+  state.config.autoWhistleTimeout = $('#cfgAutoWhistleTimeout').checked;
+  state.config.autoHorn = $('#cfgAutoHorn').checked;
   // Streaming BaskinCam: sempre dai campi (indipendente dalla disciplina)
   state.config.baskinCamEnabled = $('#cfgBaskinCam').checked;
   state.config.baskinCamHost = ($('#cfgBaskinCamHost').value || '').trim();
@@ -1380,6 +1404,8 @@ onActivate($('#actCheckUpdate'), checkForUpdates);
 /* Cosa è il Baskin: apre il pannello informativo */
 onActivate($('#actAboutBaskin'), ()=>{ closeSheet('moreBackdrop'); openSheet('baskinInfoBackdrop'); });
 onActivate($('#baskinInfoClose'), ()=>{ closeSheet('baskinInfoBackdrop'); });
+onActivate($('#actGuide'), ()=>{ closeSheet('moreBackdrop'); openSheet('guideBackdrop'); });
+onActivate($('#guideClose'), ()=>{ closeSheet('guideBackdrop'); });
 
 /* voci disponibili solo dentro l'app Android "Cast" (window.CastBridge) */
 (function setupCastMenu(){
@@ -1397,14 +1423,17 @@ onActivate($('#baskinInfoClose'), ()=>{ closeSheet('baskinInfoBackdrop'); });
 
 onActivate($('#actScoreColor'), toggleScoreColor);
 onActivate($('#actMute'), toggleMute);
-onActivate($('#actLanguage'), ()=>{
-  // ciclo: Sistema -> Italiano -> English -> Français -> Sistema...
-  const cur = I18N.getPref();
-  const order = ['system', ...I18N.supported];
-  const next = order[(order.indexOf(cur) + 1) % order.length];
-  I18N.setPref(next);
-  location.reload();   // il modo più semplice e affidabile per riapplicare la lingua ovunque
+/* selettore lingua diretto: ogni bandiera imposta subito quella lingua */
+document.querySelectorAll('.lang-flag').forEach(btn=>{
+  onActivate(btn, ()=>{ I18N.setPref(btn.dataset.lang); location.reload(); });
 });
+/* evidenzia la bandiera/lingua attualmente attiva */
+{
+  const pref = I18N.getPref();
+  const active = (pref === 'system' || !I18N.supported.includes(pref)) ? 'system' : pref;
+  const btn = document.querySelector(`.lang-flag[data-lang="${active}"]`);
+  if(btn) btn.classList.add('is-active');
+}
 onActivate($('#actSettings'), ()=>{ closeSheet('moreBackdrop'); openSettings(); });
 onActivate($('#actResetApp'), ()=>{
   closeSheet('moreBackdrop');
@@ -1435,16 +1464,6 @@ onActivate($('#actQuit'), ()=>{
   if(issues){
     issues.href = REPO_URL + '/issues';
     issues.addEventListener('click', ()=> closeSheet('moreBackdrop'));
-  }
-}
-/* link alla guida all'uso (file nel repo, uno per lingua): scelto in base alla
-   lingua attiva dell'app, non a quella del browser che l'apre */
-{
-  const guide = $('#actGuide');
-  if(guide){
-    const guideFile = { it: 'guida-it.md', en: 'guide-en.md', fr: 'guide-fr.md' }[I18N.getLang()] || 'guida-it.md';
-    guide.href = REPO_URL + '/blob/beta/docs/' + guideFile;
-    guide.addEventListener('click', ()=> closeSheet('moreBackdrop'));
   }
 }
 onActivate($('#actWake'), toggleWake);

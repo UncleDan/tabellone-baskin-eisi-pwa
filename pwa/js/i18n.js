@@ -85,7 +85,7 @@ const I18N_DICT = {
     version_label: 'Versione',
     btn_install: 'Installa app',
     btn_about_baskin: 'Cosa è il Baskin',
-    btn_guide: 'Guida all\'uso ↗',
+    btn_guide: 'Guida all\'uso',
     btn_repo: 'Codice sorgente su GitHub ↗',
     btn_issues: 'Segnalazioni ↗',
     btn_check_update: 'Verifica aggiornamenti',
@@ -107,6 +107,45 @@ const I18N_DICT = {
     about_baskin_title: 'Cosa è il Baskin',
     about_baskin_text: 'Il Baskin è uno sport fondato sul basket, inclusivo per progettazione, che prevede per regolamento la partecipazione simultanea degli atleti senza divisione in categorie grazie ad un sistema basato sui ruoli in campo: atleti di entrambi i sessi, con e senza disabilità, con disabilità fisiche e/o cognitive giocano insieme sullo stesso campo la stessa partita. Il regolamento del Baskin è una proprietà intellettuale di <em>Associazione Baskin</em> ed i campionati in Italia sono organizzati da <em>EISI - Ente Italiano Sport Inclusivi</em>, Ente di Promozione Paralimpica riconosciuto dal <em>Comitato Italiano Paralimpico</em>.',
     logos_disclaimer: 'I loghi «EISI» e «Baskin» sono marchi registrati rispettivamente da Ente Italiano Sport Inclusivi e Associazione Baskin.',
+
+    aria_guide_dialog: 'Guida all\'uso',
+    guide_main_title: '🏟️ Schermata principale',
+    guide_main_body: '<ul>' +
+      '<li><strong>▶️ / ⏸️</strong> avvia o ferma il cronometro (anche con la barra spaziatrice).</li>' +
+      '<li>A fine tempo compare <strong>⏭ Periodo successivo</strong>: con conferma avanza di un periodo e riporta il cronometro al tempo pieno.</li>' +
+      '<li><strong>✏️</strong> apre le impostazioni/correzioni. <strong>⋯</strong> apre questo menu.</li>' +
+      '<li><strong>+1 / +2 / +3</strong> aumentano il punteggio della squadra a sinistra o a destra.</li>' +
+      '<li>Tocca la <strong>pillola dei timeout</strong> per accenderne uno; a tutti accesi, il tocco successivo li azzera.</li>' +
+      '<li>I tasti dei <strong>falli</strong> compaiono solo se il <em>Conteggio falli</em> è attivo nelle impostazioni.</li>' +
+      '<li>In basso a destra: <strong>📣 sirena</strong> e <strong>fischietto</strong>, per riprodurre i suoni manualmente.</li>' +
+      '</ul>',
+    guide_edit_title: '⚙️ Impostazioni / correzioni (✏️)',
+    guide_edit_body: '<ul>' +
+      '<li>Il cronometro si <strong>blocca automaticamente</strong> entrando in questa schermata.</li>' +
+      '<li><strong>✔️</strong> salva le modifiche e torna alla modalità operativa.</li>' +
+      '<li>Tocca il <strong>tempo</strong> o il <strong>periodo</strong> (riquadri tratteggiati) per aprire i rispettivi rotori.</li>' +
+      '<li>Tocca il <strong>nome di una squadra</strong> per modificarlo; sotto, una riga di colori imposta il colore della scritta.</li>' +
+      '<li><strong>−1 / −2 / −3</strong> abbassano il punteggio.</li>' +
+      '<li>In basso a sinistra, <strong>Reset</strong> (rosso) azzera la partita previa conferma.</li>' +
+      '</ul>',
+    guide_settings_title: '🏀 Impostazioni partita (dal menu ⋯)',
+    guide_settings_body: '<ul>' +
+      '<li><strong>Modalità</strong>: Baskin (valori standard) oppure Personalizza (ogni campo modificabile).</li>' +
+      '<li><strong>Logica timeout</strong>: Baskin (riporto all\'indietro) oppure Basket (monte per tempo).</li>' +
+      '<li><strong>Modalità bonus</strong>: ultimi 2′ (Baskin), dopo N falli (Basket), oppure nessuno.</li>' +
+      '<li>Durata periodo/supplementari, numero di periodi, timeout, soglia falli, sirena e fischio automatici.</li>' +
+      '<li><strong>Streaming BaskinCam</strong>: invio dello stato ad un dispositivo companion sulla rete locale.</li>' +
+      '<li><strong>Reset applicazione</strong>: azzera tutto e riporta le impostazioni ai valori Baskin.</li>' +
+      '</ul>',
+    guide_possession_title: '🔄 Possesso e bonus',
+    guide_possession_body: '<ul>' +
+      '<li>Le <strong>frecce di possesso</strong>: un tap su una freccia accende quella e spegne l\'altra.</li>' +
+      '<li>Il <strong>bonus</strong> è indicato da un pallino per squadra accanto all\'etichetta "Falli".</li>' +
+      '</ul>',
+    guide_language_title: '🌐 Lingua',
+    guide_language_body: 'L\'app è disponibile in italiano, inglese e francese. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; le bandierine nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.',
+    guide_autosave_title: '💾 Salvataggio automatico',
+    guide_autosave_body: 'Lo stato della partita viene salvato ad ogni comando, anche se l\'app va in background o si chiude inaspettatamente: alla riapertura si riprende esattamente da dove eri (a cronometro fermo, per sicurezza).',
     close: 'Chiudi',
 
     // Impostazioni partita
@@ -131,6 +170,7 @@ const I18N_DICT = {
     field_manual_fouls: 'Conteggio falli',
     field_reset_fouls: 'Azzera i falli ad ogni periodo',
     field_possession: 'Frecce possesso alternato',
+    field_auto_whistle_timeout: 'Fischio automatico se timeout non disponibile',
     field_auto_horn: 'Sirena automatica a fine tempo',
     baskincam_title: 'Streaming BaskinCam',
     field_baskincam_enable: 'Attiva invio verso BaskinCam',
@@ -233,7 +273,7 @@ const I18N_DICT = {
     version_label: 'Version',
     btn_install: 'Install app',
     btn_about_baskin: 'What is Baskin',
-    btn_guide: 'User guide ↗',
+    btn_guide: 'User guide',
     btn_repo: 'Source code on GitHub ↗',
     btn_issues: 'Report an issue ↗',
     btn_check_update: 'Check for updates',
@@ -254,6 +294,45 @@ const I18N_DICT = {
     about_baskin_title: 'What is Baskin',
     about_baskin_text: 'Baskin is a sport built on basketball, inclusive by design: its rules call for the simultaneous participation of all athletes with no separate categories, thanks to a system based on on-court roles \u2014 athletes of every gender, with and without disabilities, including physical and/or cognitive disabilities, play together on the same court in the same game. The Baskin rulebook is the intellectual property of <em>Associazione Baskin</em>, and championships in Italy are organised by <em>EISI - Ente Italiano Sport Inclusivi</em>, a Paralympic Promotion Body recognised by the <em>Italian Paralympic Committee</em>.',
     logos_disclaimer: 'The «EISI» and «Baskin» logos are registered trademarks of Ente Italiano Sport Inclusivi and Associazione Baskin respectively.',
+
+    aria_guide_dialog: 'User guide',
+    guide_main_title: '🏟️ Main screen',
+    guide_main_body: '<ul>' +
+      '<li><strong>▶️ / ⏸️</strong> start or stop the clock (also works with the spacebar).</li>' +
+      '<li>When time runs out, an <strong>⏭ Next period</strong> button appears: with confirmation, it advances one period and resets the clock to full time.</li>' +
+      '<li><strong>✏️</strong> opens settings/corrections. <strong>⋯</strong> opens this menu.</li>' +
+      '<li><strong>+1 / +2 / +3</strong> increase the left or right team\'s score.</li>' +
+      '<li>Tap the <strong>timeout pill</strong> to light one up; once all are lit, the next tap resets them.</li>' +
+      '<li>The <strong>foul</strong> buttons only appear if <em>Foul count</em> is enabled in settings.</li>' +
+      '<li>Bottom right: <strong>📣 horn</strong> and <strong>whistle</strong>, to play the sounds manually.</li>' +
+      '</ul>',
+    guide_edit_title: '⚙️ Settings / corrections (✏️)',
+    guide_edit_body: '<ul>' +
+      '<li>The clock is <strong>automatically paused</strong> when you enter this screen.</li>' +
+      '<li><strong>✔️</strong> saves your changes and returns to game mode.</li>' +
+      '<li>Tap the <strong>time</strong> or the <strong>period</strong> (dashed boxes) to open the respective pickers.</li>' +
+      '<li>Tap a <strong>team name</strong> to edit it; below, a row of colors sets the text color.</li>' +
+      '<li><strong>−1 / −2 / −3</strong> lower the score.</li>' +
+      '<li>Bottom left, <strong>Reset</strong> (red) resets the match after confirmation.</li>' +
+      '</ul>',
+    guide_settings_title: '🏀 Match settings (from the ⋯ menu)',
+    guide_settings_body: '<ul>' +
+      '<li><strong>Mode</strong>: Baskin (standard values) or Custom (every field editable).</li>' +
+      '<li><strong>Timeout logic</strong>: Baskin (carries over) or Basket (pool per half).</li>' +
+      '<li><strong>Bonus mode</strong>: last 2′ (Baskin), after N fouls (Basket), or none.</li>' +
+      '<li>Period/overtime length, number of periods, timeouts, foul threshold, automatic horn and whistle.</li>' +
+      '<li><strong>BaskinCam streaming</strong>: sends match state to a companion device on the local network.</li>' +
+      '<li><strong>Reset app</strong>: clears everything and restores Baskin default settings.</li>' +
+      '</ul>',
+    guide_possession_title: '🔄 Possession and bonus',
+    guide_possession_body: '<ul>' +
+      '<li>The <strong>possession arrows</strong>: tapping one lights it up and turns off the other.</li>' +
+      '<li>The <strong>bonus</strong> is shown by one dot per team next to the "Fouls" label.</li>' +
+      '</ul>',
+    guide_language_title: '🌐 Language',
+    guide_language_body: 'The app is available in Italian, English and French. On first launch, the language is detected automatically from your device; the flags in the ⋯ menu let you choose a specific one at any time.',
+    guide_autosave_title: '💾 Automatic saving',
+    guide_autosave_body: 'Match state is saved after every action, even if the app goes to the background or closes unexpectedly: reopening it picks up exactly where you left off (with the clock paused, for safety).',
     close: 'Close',
 
     aria_match_settings_dialog: 'Match settings',
@@ -277,6 +356,7 @@ const I18N_DICT = {
     field_manual_fouls: 'Foul count',
     field_reset_fouls: 'Reset fouls every period',
     field_possession: 'Alternating possession arrows',
+    field_auto_whistle_timeout: 'Automatic whistle if timeout unavailable',
     field_auto_horn: 'Automatic horn at time expiry',
     baskincam_title: 'BaskinCam streaming',
     field_baskincam_enable: 'Enable sending to BaskinCam',
@@ -377,7 +457,7 @@ const I18N_DICT = {
     version_label: 'Version',
     btn_install: 'Installer l\'application',
     btn_about_baskin: 'Qu\'est-ce que le Baskin',
-    btn_guide: 'Guide d\'utilisation ↗',
+    btn_guide: 'Guide d\'utilisation',
     btn_repo: 'Code source sur GitHub ↗',
     btn_issues: 'Signaler un problème ↗',
     btn_check_update: 'Vérifier les mises à jour',
@@ -398,6 +478,45 @@ const I18N_DICT = {
     about_baskin_title: 'Qu\'est-ce que le Baskin',
     about_baskin_text: 'Le Baskin est un sport fondé sur le basket-ball, inclusif par conception : son règlement prévoit la participation simultanée de tous les athlètes sans distinction de catégories, grâce à un système fondé sur des rôles sur le terrain \u2014 des athlètes des deux sexes, avec et sans handicap, y compris des handicaps physiques et/ou cognitifs, jouent ensemble sur le même terrain le même match. Le règlement du Baskin est une propriété intellectuelle de l\'<em>Associazione Baskin</em>, et les championnats en Italie sont organisés par l\'<em>EISI - Ente Italiano Sport Inclusivi</em>, organisme de promotion paralympique reconnu par le <em>Comité paralympique italien</em>.',
     logos_disclaimer: 'Les logos « EISI » et « Baskin » sont des marques déposées respectivement par Ente Italiano Sport Inclusivi et Associazione Baskin.',
+
+    aria_guide_dialog: 'Guide d\'utilisation',
+    guide_main_title: '🏟️ Écran principal',
+    guide_main_body: '<ul>' +
+      '<li><strong>▶️ / ⏸️</strong> démarre ou arrête le chronomètre (fonctionne aussi avec la barre d\'espace).</li>' +
+      '<li>Quand le temps est écoulé, un bouton <strong>⏭ Période suivante</strong> apparaît : après confirmation, il passe à la période suivante et remet le chronomètre à temps plein.</li>' +
+      '<li><strong>✏️</strong> ouvre les réglages/corrections. <strong>⋯</strong> ouvre ce menu.</li>' +
+      '<li><strong>+1 / +2 / +3</strong> augmentent le score de l\'équipe à gauche ou à droite.</li>' +
+      '<li>Touchez la <strong>pastille des temps morts</strong> pour en allumer un ; une fois tous allumés, l\'appui suivant les réinitialise.</li>' +
+      '<li>Les boutons de <strong>fautes</strong> n\'apparaissent que si le <em>Comptage des fautes</em> est activé dans les réglages.</li>' +
+      '<li>En bas à droite : <strong>📣 sirène</strong> et <strong>sifflet</strong>, pour jouer les sons manuellement.</li>' +
+      '</ul>',
+    guide_edit_title: '⚙️ Réglages / corrections (✏️)',
+    guide_edit_body: '<ul>' +
+      '<li>Le chronomètre se <strong>met automatiquement en pause</strong> à l\'entrée sur cet écran.</li>' +
+      '<li><strong>✔️</strong> enregistre les modifications et revient au mode match.</li>' +
+      '<li>Touchez le <strong>temps</strong> ou la <strong>période</strong> (cadres en pointillés) pour ouvrir les molettes correspondantes.</li>' +
+      '<li>Touchez le <strong>nom d\'une équipe</strong> pour le modifier ; en dessous, une rangée de couleurs définit la couleur du texte.</li>' +
+      '<li><strong>−1 / −2 / −3</strong> diminuent le score.</li>' +
+      '<li>En bas à gauche, <strong>Réinitialiser</strong> (rouge) réinitialise le match après confirmation.</li>' +
+      '</ul>',
+    guide_settings_title: '🏀 Réglages du match (depuis le menu ⋯)',
+    guide_settings_body: '<ul>' +
+      '<li><strong>Mode</strong> : Baskin (valeurs standard) ou Personnaliser (chaque champ modifiable).</li>' +
+      '<li><strong>Logique des temps morts</strong> : Baskin (report) ou Basket (quota par mi-temps).</li>' +
+      '<li><strong>Mode bonus</strong> : dernières 2′ (Baskin), après N fautes (Basket), ou aucun.</li>' +
+      '<li>Durée de la période/prolongations, nombre de périodes, temps morts, seuil de fautes, sirène et sifflet automatiques.</li>' +
+      '<li><strong>Diffusion BaskinCam</strong> : envoi de l\'état du match vers un appareil compagnon sur le réseau local.</li>' +
+      '<li><strong>Réinitialiser l\'application</strong> : efface tout et restaure les réglages Baskin par défaut.</li>' +
+      '</ul>',
+    guide_possession_title: '🔄 Possession et bonus',
+    guide_possession_body: '<ul>' +
+      '<li>Les <strong>flèches de possession</strong> : toucher l\'une l\'allume et éteint l\'autre.</li>' +
+      '<li>Le <strong>bonus</strong> est indiqué par un point par équipe à côté du libellé « Fautes ».</li>' +
+      '</ul>',
+    guide_language_title: '🌐 Langue',
+    guide_language_body: 'L\'application est disponible en italien, anglais et français. Au premier lancement, la langue est détectée automatiquement à partir de celle de l\'appareil ; les drapeaux dans le menu ⋯ permettent d\'en choisir une spécifique à tout moment.',
+    guide_autosave_title: '💾 Sauvegarde automatique',
+    guide_autosave_body: 'L\'état du match est enregistré après chaque action, même si l\'application passe en arrière-plan ou se ferme de manière inattendue : à la réouverture, vous reprenez exactement où vous en étiez (chronomètre en pause, par sécurité).',
     close: 'Fermer',
 
     aria_match_settings_dialog: 'Réglages du match',
@@ -421,6 +540,7 @@ const I18N_DICT = {
     field_manual_fouls: 'Comptage des fautes',
     field_reset_fouls: 'Réinitialiser les fautes à chaque période',
     field_possession: 'Flèches de possession alternée',
+    field_auto_whistle_timeout: 'Coup de sifflet automatique si temps mort indisponible',
     field_auto_horn: 'Sirène automatique en fin de temps',
     baskincam_title: 'Diffusion BaskinCam',
     field_baskincam_enable: 'Activer l\'envoi vers BaskinCam',
@@ -464,7 +584,7 @@ function i18nDetectSystemLang(){
       if(I18N_SUPPORTED.includes(base)) return base;
     }
   }catch(_){}
-  return 'it';
+  return 'en';
 }
 
 function i18nGetPref(){
@@ -513,12 +633,6 @@ function applyI18n(){
 
   const desc = document.querySelector('meta[name="description"]');
   if(desc) desc.setAttribute('content', t('meta_description'));
-
-  const langState = document.getElementById('langState');
-  if(langState){
-    const pref = i18nGetPref();
-    langState.textContent = (pref === 'system') ? t('lang_system') : t('lang_name');
-  }
 }
 
 window.I18N = {

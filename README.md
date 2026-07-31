@@ -48,64 +48,18 @@ Il Tabellone Baskin EISI esiste in **due repository**, che lavorano insieme:
 
 ## Funzioni
 
-> 📋 Questa sezione è anche disponibile come guida autonoma, con icone e in tre lingue: [italiano](docs/guida-it.md) · [English](docs/guide-en.md) · [Français](docs/guide-fr.md). Nell'app è raggiungibile dal pulsante **Guida all'uso** nel menu `…`.
+Le istruzioni d'uso complete (schermata principale, impostazioni/correzioni, impostazioni partita, possesso e bonus, lingua, salvataggio automatico) sono nella **guida**, disponibile in tre lingue:
 
-**Schermata principale (modalità operativa)**
-- ▶️ avvia il tempo e diventa ⏸️; premendo ⏸️ il cronometro si ferma e torna ▶️ (anche con la barra spaziatrice).
-- A **fine tempo** (dopo la sirena automatica), accanto al play compare il pulsante **⏭ Periodo successivo**: con conferma avanza di un periodo (dopo il 4° parte `1TS`, `2TS`…) e riporta il cronometro al tempo pieno. Alla fine del **4° quarto** e di ogni **supplementare** viene proposto **solo in caso di parità** (altrimenti la partita è finita).
-- ✏️ (matita) entra in modalità impostazioni/correzioni; `…` mostra la **versione** con il tasto **Verifica aggiornamenti**.
-- `+1` `+2` `+3` a sinistra aumentano il punteggio della **Squadra 1**, a destra quello della **Squadra 2**.
-- Tap sulla **pillola timeout**: accende un pallino in più; quando sono tutti accesi, il tocco successivo li azzera. Le due squadre sono indipendenti.
-- I falli hanno i tasti `+` (operativa) e `−` (impostazioni) **solo se attivi** dal selettore *Conteggio falli* nelle impostazioni partita. Di **default sono spenti**: restano solo l'etichetta "Falli" e i pallini del bonus.
-- In basso a destra: **sirena** 📣 e **fischietto**, che riproducono i rispettivi suoni.
+- 🇮🇹 [Guida in italiano](docs/guida-it.md)
+- 🇬🇧 [User guide in English](docs/guide-en.md)
+- 🇫🇷 [Guide en français](docs/guide-fr.md)
 
-**Schermata impostazioni / correzioni** (matita)
-- Il tasto **play/pause** resta visibile ma è **bloccato**: entrando in impostazioni il cronometro si ferma.
-- Il tasto **✔️ (check)** salva le modifiche e torna alla modalità operativa.
-- Tocca il **tempo** (riquadro tratteggiato) per aprire i **rotori** minuti / secondi / decimi.
-- Tocca il **periodo** (riquadro tratteggiato) per aprire il **rotore** di selezione: `1` … `4`, poi `1TS` … `9TS` (tempi supplementari).
-- Tocca la **squadra 1** o la **squadra 2** (riquadri tratteggiati): compare la tastiera per modificare il **nome**. Sotto al nome, una riga di **colori** (bianco, nero, giallo, magenta, ciano, arancione, verde, viola + colore personalizzato) imposta il colore della scritta; per i colori scuri viene aggiunta automaticamente una lieve **bordatura bianca** per la leggibilità.
-- In **basso a sinistra** il pulsante **Reset** (rosso) azzera la partita previa **conferma**: riporta a zero punteggi, falli, timeout, tempo e periodo, mantenendo impostazioni e nomi.
-- Usa i tasti `−1` `−2` `−3` ai lati per **abbassare il punteggio** (sinistra = Squadra 1, destra = Squadra 2).
-- Tocca i **pallini timeout** per correggerli (stesso comportamento della modalità operativa).
-- I falli mostrano i tasti `−` di correzione solo se il *Conteggio falli* è attivo nelle impostazioni; altrimenti il riquadro falli resta senza contatori.
-- **Sirena** e **fischietto** restano disponibili anche qui.
-
-**Impostazioni partita** (dal menu `…`)
-- **Modalità**: pulsanti **Baskin** (reimposta tutti i campi ai valori Baskin, poi **Salva**) e **Personalizza** (abilita la modifica di ogni singolo campo).
-- **Logica timeout** (in Personalizza): *Baskin* (1 per quarto, riporto all'indietro entro la metà) oppure *Basket* (2 nel 1° tempo, 3 nel 2°, max 2 negli ultimi 2′; 1 per supplementare).
-- **Modalità bonus**: *Ultimi 2′ (Baskin)* — entrambe le squadre negli ultimi 2′ di 4°/supplementari; *Dopo N falli (Basket)* — per squadra, si accende al raggiungimento della soglia (default 4) **alla ripartenza del cronometro**, resta acceso fino a fine periodo; *Nessuno*.
-- **Conteggio falli** on/off (default off Baskin).
-- **Frecce possesso alternato** on/off (impostazione in Personalizza, default off).
-- Durata periodo, numero di periodi, **durata dei supplementari**, timeout per tempo/supplementare (Baskin), soglia falli per il bonus.
-- Azzeramento automatico dei falli a ogni periodo (on/off), sirena automatica a fine tempo (on/off).
-- **Streaming BaskinCam**: invio automatico dello stato partita a un dispositivo companion sulla rete locale (vedi sezione dedicata). Checkbox *Attiva invio* (default OFF) e campo *IP:porta*.
-- **Reset applicazione**: azzera tutto (punteggi, falli, timeout, possesso, nomi) e riporta le impostazioni ai valori Baskin (disponibile dal menu `…`).
-
-**Possesso e bonus (area centrale)**
-- **Possesso** (sopra ai falli): in operativa un tap su una freccia accende quella e spegne l'altra; in impostazioni le frecce si accendono/spengono singolarmente (anche tutte spente).
-- **Bonus**: indicato da **pallini** (uno per squadra) accanto all'etichetta "Falli".
-
-**Lingua** (dal menu `…`)
-- L'app è disponibile in **italiano**, **inglese** e **francese**.
-- Alla prima apertura la lingua viene rilevata automaticamente dalla **lingua di sistema** del dispositivo; se non è tra le tre supportate, l'app parte in italiano.
-- Il pulsante **Lingua** nel menu `…` permette di forzare una lingua specifica (ciclo: *Sistema → Italiano → English → Français → Sistema…*), sovrascrivendo il rilevamento automatico. La scelta viene ricordata.
-
-Lo stato (punteggi, falli, timeout, tempo, nomi, impostazioni) viene salvato in locale **ad ogni comando** e anche quando l'app va in background o viene chiusa: in caso di chiusura imprevista o crash, alla riapertura si riprende esattamente da dove eri (a orologio fermo, per sicurezza, così basta premere ▶️ per ripartire). Anche le opzioni — conteggio falli, audio, schermo sempre acceso, lingua — vengono ricordate.
+La stessa guida è integrata **anche nell'app** (pulsante **Guida all'uso** nel menu `…`), disponibile offline e nella lingua attiva. Le due copie (repository e app) devono restare allineate: aggiornare entrambe quando cambia una funzione.
 
 ---
 
-## Pubblicazione su GitHub Pages
+## Uso in locale
 
-1. Crea un repository (es. `tabellone-baskin-eisi`) e carica **tutti i file mantenendo la struttura** (README e `.gitignore` nella root, l'app nella cartella `pwa/`).
-2. Vai su **Settings → Pages**.
-3. In *Build and deployment* scegli **Deploy from a branch**, branch `main`, cartella `/ (root)`, poi **Save**.
-4. Dopo qualche minuto l'app sarà su `https://<utente>.github.io/tabellone-baskin-eisi/pwa/`.
-5. Apri il link da smartphone/tablet e usa **"Aggiungi a schermata Home" / "Installa app"**: da quel momento funziona anche senza rete.
-
-> I percorsi sono tutti relativi, quindi l'app funziona dalla cartella `pwa/` (o da qualunque altra sottocartella) senza modifiche.
-
-### Uso in locale
 Aprendo `pwa/index.html` con doppio clic (`file://`) l'app funziona, ma **il service worker e l'installazione PWA richiedono `http(s)`**. Per provarli in locale:
 
 ```bash
@@ -305,8 +259,8 @@ Di conseguenza cambia anche il **significato** dei campi fuori da `config`:
 
 ## Licenza
 
-Codice rilasciato sotto licenza **MIT** (vedi [`LICENSE`](LICENSE)) — open source e
-pienamente compatibile con F-Droid. I suoni in `pwa/sounds/` sono CC0.
+Codice rilasciato sotto licenza **MIT** (vedi [`LICENSE`](LICENSE)) — open source.
+I suoni in `pwa/sounds/` sono CC0.
 
 > I loghi «EISI» e «Baskin» sono marchi registrati rispettivamente da Ente
 > Italiano Sport Inclusivi e Associazione Baskin. La licenza MIT copre il
@@ -318,4 +272,4 @@ Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub*
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
-**Versione:** 1.18.2
+**Versione:** 1.19.0

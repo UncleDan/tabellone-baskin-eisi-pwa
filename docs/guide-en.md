@@ -36,6 +36,7 @@ Use this to **fix a mistake** or set up the match before it starts.
 - **Timeout logic**: *Baskin* (1 per quarter, carries over) or *Basket* (pool per half, 2 in the 1st half and 3 in the 2nd).
 - **Bonus mode**: *Last 2′ (Baskin)*, *After N fouls (Basket)*, or *None*.
 - Period and overtime length, number of periods, timeouts, foul threshold for the bonus.
+- **Automatic whistle if timeout unavailable** and **automatic horn at time expiry**: always customizable, even in Baskin mode.
 - **BaskinCam streaming**: automatically sends match state to a companion device on the local network.
 - **Reset app**: clears everything and restores Baskin default settings.
 
@@ -46,7 +47,9 @@ Use this to **fix a mistake** or set up the match before it starts.
 
 ## 🌐 Language
 
-The app is available in **Italian**, **English** and **French**. On first launch, the language is detected automatically from your device; the **Language** button in the ⋯ menu lets you force a specific one at any time.
+The app is available in **Italian**, **English** and **French**. On first launch, the language is detected automatically from your device (if none of the three is supported, it starts in English); the **flags** 🌐🇮🇹🇬🇧🇫🇷 in the ⋯ menu let you choose a specific one at any time.
+
+**Team names**, if not customized, automatically follow the chosen language (e.g. "Team 1" becomes "Équipe 1" in French); a name you've typed yourself stays unchanged when switching language.
 
 ## 💾 Automatic saving
 

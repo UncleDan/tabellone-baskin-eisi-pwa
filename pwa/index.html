@@ -208,12 +208,12 @@
       <h2 data-i18n="info_title">Informazioni</h2>
       <div class="about">
         <p class="about-title">Tabellone Baskin EISI</p>
-        <p class="about-meta"><span data-i18n="version_label">Versione</span> <span id="aboutVersion">1.18.2</span> — Daniele Lolli (UncleDan)</p>
+        <p class="about-meta"><span data-i18n="version_label">Versione</span> <span id="aboutVersion">1.19.0</span> — Daniele Lolli (UncleDan)</p>
       </div>
       <!-- verdi: installazione / info / sorgenti / segnalazioni / aggiornamenti -->
       <button class="sheet-item green" id="actInstall" type="button" data-i18n="btn_install" hidden>Installa app</button>
+      <button class="sheet-item green" id="actGuide" type="button" data-i18n="btn_guide">Guida all'uso</button>
       <button class="sheet-item green" id="actAboutBaskin" type="button" data-i18n="btn_about_baskin">Cosa è il Baskin</button>
-      <a class="sheet-item sheet-link green" id="actGuide" href="https://github.com/UncleDan/tabellone-baskin-eisi/blob/beta/docs/guida-it.md" target="_blank" rel="noopener noreferrer" data-i18n="btn_guide">Guida all'uso ↗</a>
       <a class="sheet-item sheet-link green" id="actRepo" href="https://github.com/UncleDan/tabellone-baskin-eisi" target="_blank" rel="noopener noreferrer" data-i18n="btn_repo">Codice sorgente su GitHub ↗</a>
       <a class="sheet-item sheet-link green" id="actIssues" href="https://github.com/UncleDan/tabellone-baskin-eisi/issues" target="_blank" rel="noopener noreferrer" data-i18n="btn_issues">Segnalazioni ↗</a>
       <button class="sheet-item green" id="actCheckUpdate" type="button" data-i18n="btn_check_update">Verifica aggiornamenti</button>
@@ -224,7 +224,15 @@
       <button class="sheet-item amber" id="actWake" type="button"><span data-i18n="btn_wake">Schermo sempre acceso:</span> <span id="wakeState">off</span></button>
       <button class="sheet-item amber" id="actScoreColor" type="button"><span data-i18n="btn_score_color">Punti colore squadra:</span> <span id="scoreColorState">off</span></button>
       <button class="sheet-item amber" id="actMute" type="button"><span data-i18n="btn_mute">Audio:</span> <span id="muteState">on</span></button>
-      <button class="sheet-item amber" id="actLanguage" type="button"><span data-i18n="btn_language">Lingua:</span> <span id="langState">Sistema</span></button>
+      <div class="sheet-item amber lang-picker" role="group" aria-label="Lingua">
+        <span data-i18n="btn_language">Lingua:</span>
+        <span class="lang-flags">
+          <button type="button" class="lang-flag" id="langSystem" data-lang="system" aria-label="Sistema" data-i18n-aria="lang_system">🌐</button>
+          <button type="button" class="lang-flag" data-lang="it" aria-label="Italiano">🇮🇹</button>
+          <button type="button" class="lang-flag" data-lang="en" aria-label="English">🇬🇧</button>
+          <button type="button" class="lang-flag" data-lang="fr" aria-label="Français">🇫🇷</button>
+        </span>
+      </div>
       <!-- rosso scuro: azioni importanti -->
       <button class="sheet-item darkred" id="actSettings" type="button" data-i18n="btn_match_settings">Impostazioni partita</button>
       <button class="sheet-item darkred" id="actResetApp" type="button" data-i18n="btn_reset_app">Reset applicazione</button>
@@ -245,6 +253,66 @@
       </div>
       <p class="sheet-text disclaimer" data-i18n="logos_disclaimer">I loghi «EISI» e «Baskin» sono marchi registrati rispettivamente da Ente Italiano Sport Inclusivi e Associazione Baskin.</p>
       <button class="sheet-close" id="baskinInfoClose" type="button" data-i18n="close">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- ============ GUIDA ALL'USO (integrata, disponibile offline) ============ -->
+  <div class="sheet-backdrop" id="guideBackdrop" hidden>
+    <div class="sheet" role="dialog" data-i18n-aria="aria_guide_dialog" aria-label="Guida all'uso">
+      <h2 data-i18n="btn_guide">Guida all'uso</h2>
+
+      <h3 class="sheet-h3" data-i18n="guide_main_title">🏟️ Schermata principale</h3>
+      <div class="sheet-text" data-i18n="guide_main_body">
+        <ul>
+          <li><strong>▶️ / ⏸️</strong> avvia o ferma il cronometro (anche con la barra spaziatrice).</li>
+          <li>A fine tempo compare <strong>⏭ Periodo successivo</strong>: con conferma avanza di un periodo e riporta il cronometro al tempo pieno.</li>
+          <li><strong>✏️</strong> apre le impostazioni/correzioni. <strong>⋯</strong> apre questo menu.</li>
+          <li><strong>+1 / +2 / +3</strong> aumentano il punteggio della squadra a sinistra o a destra.</li>
+          <li>Tocca la <strong>pillola dei timeout</strong> per accenderne uno; a tutti accesi, il tocco successivo li azzera.</li>
+          <li>I tasti dei <strong>falli</strong> compaiono solo se il <em>Conteggio falli</em> è attivo nelle impostazioni.</li>
+          <li>In basso a destra: <strong>📣 sirena</strong> e <strong>fischietto</strong>, per riprodurre i suoni manualmente.</li>
+        </ul>
+      </div>
+
+      <h3 class="sheet-h3" data-i18n="guide_edit_title">⚙️ Impostazioni / correzioni (✏️)</h3>
+      <div class="sheet-text" data-i18n="guide_edit_body">
+        <ul>
+          <li>Il cronometro si <strong>blocca automaticamente</strong> entrando in questa schermata.</li>
+          <li><strong>✔️</strong> salva le modifiche e torna alla modalità operativa.</li>
+          <li>Tocca il <strong>tempo</strong> o il <strong>periodo</strong> (riquadri tratteggiati) per aprire i rispettivi rotori.</li>
+          <li>Tocca il <strong>nome di una squadra</strong> per modificarlo; sotto, una riga di colori imposta il colore della scritta.</li>
+          <li><strong>−1 / −2 / −3</strong> abbassano il punteggio.</li>
+          <li>In basso a sinistra, <strong>Reset</strong> (rosso) azzera la partita previa conferma.</li>
+        </ul>
+      </div>
+
+      <h3 class="sheet-h3" data-i18n="guide_settings_title">🏀 Impostazioni partita (dal menu ⋯)</h3>
+      <div class="sheet-text" data-i18n="guide_settings_body">
+        <ul>
+          <li><strong>Modalità</strong>: Baskin (valori standard) oppure Personalizza (ogni campo modificabile).</li>
+          <li><strong>Logica timeout</strong>: Baskin (riporto all'indietro) oppure Basket (monte per tempo).</li>
+          <li><strong>Modalità bonus</strong>: ultimi 2′ (Baskin), dopo N falli (Basket), oppure nessuno.</li>
+          <li>Durata periodo/supplementari, numero di periodi, timeout, soglia falli, sirena e fischio automatici.</li>
+          <li><strong>Streaming BaskinCam</strong>: invio dello stato ad un dispositivo companion sulla rete locale.</li>
+          <li><strong>Reset applicazione</strong>: azzera tutto e riporta le impostazioni ai valori Baskin.</li>
+        </ul>
+      </div>
+
+      <h3 class="sheet-h3" data-i18n="guide_possession_title">🔄 Possesso e bonus</h3>
+      <div class="sheet-text" data-i18n="guide_possession_body">
+        <ul>
+          <li>Le <strong>frecce di possesso</strong>: un tap su una freccia accende quella e spegne l'altra.</li>
+          <li>Il <strong>bonus</strong> è indicato da un pallino per squadra accanto all'etichetta "Falli".</li>
+        </ul>
+      </div>
+
+      <h3 class="sheet-h3" data-i18n="guide_language_title">🌐 Lingua</h3>
+      <p class="sheet-text" data-i18n="guide_language_body">L'app è disponibile in italiano, inglese e francese. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; le bandierine nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.</p>
+
+      <h3 class="sheet-h3" data-i18n="guide_autosave_title">💾 Salvataggio automatico</h3>
+      <p class="sheet-text" data-i18n="guide_autosave_body">Lo stato della partita viene salvato ad ogni comando, anche se l'app va in background o si chiude inaspettatamente: alla riapertura si riprende esattamente da dove eri (a cronometro fermo, per sicurezza).</p>
+
+      <button class="sheet-close" id="guideClose" type="button" data-i18n="close">Chiudi</button>
     </div>
   </div>
 
@@ -313,6 +381,10 @@
       <label class="field switch">
         <span data-i18n="field_possession">Frecce possesso alternato</span>
         <input type="checkbox" id="cfgPossession" />
+      </label>
+      <label class="field switch">
+        <span data-i18n="field_auto_whistle_timeout">Fischio automatico se timeout non disponibile</span>
+        <input type="checkbox" id="cfgAutoWhistleTimeout" />
       </label>
       <label class="field switch">
         <span data-i18n="field_auto_horn">Sirena automatica a fine tempo</span>

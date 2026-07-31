@@ -36,6 +36,7 @@ Si usa per **correggere** un errore o preparare la partita prima di iniziare.
 - **Logica timeout**: *Baskin* (1 per quarto, riporto all'indietro) oppure *Basket* (monte per tempo, 2 nel 1° tempo e 3 nel 2°).
 - **Modalità bonus**: *Ultimi 2′ (Baskin)*, *Dopo N falli (Basket)*, oppure *Nessuno*.
 - Durata periodo e supplementari, numero di periodi, timeout, soglia falli per il bonus.
+- **Fischio automatico se timeout non disponibile** e **sirena automatica a fine tempo**: sempre personalizzabili, anche in modalità Baskin.
 - **Streaming BaskinCam**: invio automatico dello stato partita a un dispositivo companion sulla rete locale.
 - **Reset applicazione**: azzera tutto e riporta le impostazioni ai valori Baskin.
 
@@ -46,7 +47,9 @@ Si usa per **correggere** un errore o preparare la partita prima di iniziare.
 
 ## 🌐 Lingua
 
-L'app è disponibile in **italiano**, **inglese** e **francese**. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; il pulsante **Lingua** nel menu ⋯ permette di forzarne una specifica in qualsiasi momento.
+L'app è disponibile in **italiano**, **inglese** e **francese**. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo (se non è tra le tre supportate, parte in inglese); le **bandierine** 🌐🇮🇹🇬🇧🇫🇷 nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.
+
+Il **nome delle squadre**, se non personalizzato, segue automaticamente la lingua scelta (es. "Squadra 1" diventa "Team 1" in inglese); un nome scritto a mano resta invece invariato cambiando lingua.
 
 ## 💾 Salvataggio automatico
 

@@ -36,6 +36,7 @@ Utilisez cet écran pour **corriger une erreur** ou préparer le match avant qu'
 - **Logique des temps morts** : *Baskin* (1 par quart-temps, report) ou *Basket* (quota par mi-temps, 2 en 1re mi-temps et 3 en 2e).
 - **Mode bonus** : *Dernières 2′ (Baskin)*, *Après N fautes (Basket)*, ou *Aucun*.
 - Durée de la période et des prolongations, nombre de périodes, temps morts, seuil de fautes pour le bonus.
+- **Coup de sifflet automatique si temps mort indisponible** et **sirène automatique en fin de temps** : toujours personnalisables, même en mode Baskin.
 - **Diffusion BaskinCam** : envoi automatique de l'état du match vers un appareil compagnon sur le réseau local.
 - **Réinitialiser l'application** : efface tout et restaure les réglages Baskin par défaut.
 
@@ -46,7 +47,9 @@ Utilisez cet écran pour **corriger une erreur** ou préparer le match avant qu'
 
 ## 🌐 Langue
 
-L'application est disponible en **italien**, **anglais** et **français**. Au premier lancement, la langue est détectée automatiquement à partir de celle de l'appareil ; le bouton **Langue** dans le menu ⋯ permet d'en forcer une à tout moment.
+L'application est disponible en **italien**, **anglais** et **français**. Au premier lancement, la langue est détectée automatiquement à partir de celle de l'appareil (si aucune des trois n'est prise en charge, elle démarre en anglais) ; les **drapeaux** 🌐🇮🇹🇬🇧🇫🇷 dans le menu ⋯ permettent d'en choisir une spécifique à tout moment.
+
+Le **nom des équipes**, s'il n'est pas personnalisé, suit automatiquement la langue choisie (ex. « Squadra 1 » devient « Team 1 » en anglais) ; un nom saisi manuellement reste inchangé en changeant de langue.
 
 ## 💾 Sauvegarde automatique
 
