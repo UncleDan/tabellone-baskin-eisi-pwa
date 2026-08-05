@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '2026';
+const APP_VERSION = '2026b';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -1176,12 +1176,14 @@ function saveSettings(){
 /* Reset applicazione: riporta TUTTO ai valori predefiniti (Baskin) */
 function resetApp(){
   stopClock();
+  I18N.setPref('system');   // la lingua torna al rilevamento automatico di sistema
   state = freshState(DEFAULT_CONFIG);
   pendingTimeoutMode = 'baskin';
   pendingMode = 'baskin';
   closeSheet('settingsBackdrop');
   applyFoulMode();
   updateFoulLabel();
+  applyI18n();   // riapplica le traduzioni statiche nella lingua (ri)rilevata
   renderAll();
   saveState();
   toast(t('toast_app_reset'));
@@ -1397,7 +1399,7 @@ function toggleScoreColor(){
 }
 
 /* menu "..." (Informazioni + aggiornamenti) */
-onActivate($('#btnMore'), ()=>{ updateMuteLabel(); updateFoulLabel(); updateScoreColorLabel(); openSheet('moreBackdrop'); });
+onActivate($('#btnMore'), ()=>{ updateMuteLabel(); updateFoulLabel(); updateScoreColorLabel(); updateLangHighlight(); openSheet('moreBackdrop'); });
 onActivate($('#moreClose'), ()=> closeSheet('moreBackdrop'));
 onActivate($('#actCheckUpdate'), checkForUpdates);
 
@@ -1423,17 +1425,53 @@ onActivate($('#guideClose'), ()=>{ closeSheet('guideBackdrop'); });
 
 onActivate($('#actScoreColor'), toggleScoreColor);
 onActivate($('#actMute'), toggleMute);
-/* selettore lingua diretto: ogni bandiera imposta subito quella lingua */
+/* selettore lingua diretto: ogni bandiera apre una conferma nella lingua DI
+   DESTINAZIONE (non quella attiva), così chi conferma legge già il messaggio
+   nella lingua che otterrà e sa con certezza cosa aspettarsi. */
+let pendingLangChoice = null;
 document.querySelectorAll('.lang-flag').forEach(btn=>{
-  onActivate(btn, ()=>{ I18N.setPref(btn.dataset.lang); location.reload(); });
+  onActivate(btn, ()=>{
+    const choice = btn.dataset.lang;                 // 'system' | 'it' | 'en' | 'fr'
+    const resolvedLang = (choice === 'system') ? I18N.detectSystem() : choice;
+    const langName = I18N.tFor(resolvedLang, 'lang_name');
+    pendingLangChoice = choice;
+    $('#langConfirmDialog').setAttribute('aria-label', I18N.tFor(resolvedLang, 'lang_confirm_title'));
+    $('#langConfirmTitle').textContent = I18N.tFor(resolvedLang, 'lang_confirm_title');
+    $('#langConfirmText').textContent = I18N.tFor(resolvedLang, 'lang_confirm_text', {lang: langName});
+    $('#langConfirmYes').textContent = I18N.tFor(resolvedLang, 'lang_confirm_yes');
+    $('#langConfirmCancel').textContent = I18N.tFor(resolvedLang, 'cancel');
+    closeSheet('moreBackdrop');
+    openSheet('langConfirmBackdrop');
+  });
 });
-/* evidenzia la bandiera/lingua attualmente attiva */
-{
+onActivate($('#langConfirmCancel'), ()=>{
+  // annulla: nessuna modifica, si chiude il popup e si torna nel menu
+  pendingLangChoice = null;
+  closeSheet('langConfirmBackdrop');
+  openSheet('moreBackdrop');
+});
+onActivate($('#langConfirmYes'), ()=>{
+  if(pendingLangChoice === null) return;
+  I18N.setPref(pendingLangChoice);
+  pendingLangChoice = null;
+  closeSheet('langConfirmBackdrop');
+  // come "Chiudi applicazione": salva e tenta la chiusura; se il browser la
+  // blocca (es. scheda normale, non installata), avvisa nella nuova lingua
+  saveState();
+  try{ window.close(); }catch(e){}
+  setTimeout(()=>{ toast(t('toast_quit_hint')); }, 300);
+});
+/* evidenzia la bandiera/lingua attualmente attiva (richiamata anche ad ogni
+   apertura del menu, non solo all'avvio: es. dopo un reset applicazione,
+   che può cambiare la preferenza senza ricaricare la pagina) */
+function updateLangHighlight(){
+  document.querySelectorAll('.lang-flag').forEach(b=> b.classList.remove('is-active'));
   const pref = I18N.getPref();
   const active = (pref === 'system' || !I18N.supported.includes(pref)) ? 'system' : pref;
   const btn = document.querySelector(`.lang-flag[data-lang="${active}"]`);
   if(btn) btn.classList.add('is-active');
 }
+updateLangHighlight();
 onActivate($('#actSettings'), ()=>{ closeSheet('moreBackdrop'); openSettings(); });
 onActivate($('#actResetApp'), ()=>{
   closeSheet('moreBackdrop');
@@ -1525,6 +1563,15 @@ function isTyping(e){ const t=e.target; return t && (t.tagName==='INPUT'||t.tagN
 /* =====================================================================
    AVVIO
    ===================================================================== */
+/* Difesa contro un reload che ripristina uno stato del DOM non aggiornato
+   (osservato su alcuni browser/PWA mobili dopo un cambio lingua, che su
+   quei dispositivi mostrava contemporaneamente i pulsanti di gioco e di
+   modifica finché non si chiudeva e riapriva l'app): la modalità di
+   partenza è SEMPRE "gioco", quindi la forziamo qui esplicitamente prima
+   di ogni altra cosa, invece di fidarci di qualunque stato residuo. */
+body.classList.remove('mode-edit');
+body.classList.add('mode-game');
+
 applyI18n();   // traduce l'HTML statico prima del primo render
 renderAll();
 

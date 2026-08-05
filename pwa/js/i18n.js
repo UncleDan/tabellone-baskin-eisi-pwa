@@ -202,6 +202,9 @@ const I18N_DICT = {
     toast_score_color_off: 'Punti verdi',
     confirm_reset_app: 'Reset applicazione: azzera punteggi, falli, timeout, possesso, nomi e riporta le impostazioni ai valori Baskin. Procedere?',
     confirm_quit: 'Chiudere l\'applicazione?',
+    lang_confirm_title: 'Cambiare lingua?',
+    lang_confirm_text: 'L\'app si chiuderà; alla riapertura sarà in {lang}.',
+    lang_confirm_yes: 'Conferma',
     meta_description: 'Tabellone segnapunti per il Baskin: tempo, punti, timeout e bonus. Funziona offline.'
   },
 
@@ -386,6 +389,9 @@ const I18N_DICT = {
     toast_score_color_off: 'Green scores',
     confirm_reset_app: 'App reset: clears scores, fouls, timeouts, possession, team names and restores Baskin default settings. Proceed?',
     confirm_quit: 'Close the app?',
+    lang_confirm_title: 'Change language?',
+    lang_confirm_text: 'The app will close; when you reopen it, it will be in {lang}.',
+    lang_confirm_yes: 'Confirm',
     meta_description: 'Scoreboard for Baskin: time, points, timeouts and bonus. Works offline.'
   },
 
@@ -570,6 +576,9 @@ const I18N_DICT = {
     toast_score_color_off: 'Scores en vert',
     confirm_reset_app: 'Réinitialisation de l\'application : efface scores, fautes, temps morts, possession, noms d\'équipe et restaure les réglages Baskin par défaut. Continuer ?',
     confirm_quit: 'Fermer l\'application ?',
+    lang_confirm_title: 'Changer de langue ?',
+    lang_confirm_text: 'L\'application va se fermer ; à la réouverture, elle sera en {lang}.',
+    lang_confirm_yes: 'Confirmer',
     meta_description: 'Tableau de marque pour le Baskin : temps, points, temps morts et bonus. Fonctionne hors ligne.'
   }
 };
@@ -613,6 +622,14 @@ function t(key, vars){
   return i18nFormat(str, vars);
 }
 
+/* come t(), ma per una lingua specifica indipendente da quella attiva
+   (es. per anticipare un messaggio nella lingua a cui si sta per passare) */
+function tFor(lang, key, vars){
+  const dict = I18N_DICT[lang] || I18N_DICT.it;
+  const str = (key in dict) ? dict[key] : (I18N_DICT.it[key] !== undefined ? I18N_DICT.it[key] : key);
+  return i18nFormat(str, vars);
+}
+
 /* applica le traduzioni a tutti gli elementi con attributi data-i18n-* nel DOM */
 function applyI18n(){
   const lang = i18nGetLang();
@@ -636,9 +653,10 @@ function applyI18n(){
 }
 
 window.I18N = {
-  t, applyI18n,
+  t, tFor, applyI18n,
   getLang: i18nGetLang,
   getPref: i18nGetPref,
   setPref: i18nSetPref,
+  detectSystem: i18nDetectSystemLang,
   supported: I18N_SUPPORTED
 };
