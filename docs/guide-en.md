@@ -1,6 +1,6 @@
-# 📋 User guide — Tabellone Baskin EISI
+# 📋 User guide — Tabellone Baskin EISI (PWA)
 
-*[Versione italiana](guida-it.md) · [Version française](guide-fr.md)*
+*[Versione italiana](guida-it.md) · [Version française](guide-fr.md) · [Versión española](guia-es.md)*
 
 This guide explains how to use the scoreboard during a Baskin match. For installation, publishing and technical details, see the [README](../README.md).
 
@@ -47,7 +47,7 @@ Use this to **fix a mistake** or set up the match before it starts.
 
 ## 🌐 Language
 
-The app is available in **Italian**, **English** and **French**. On first launch, the language is detected automatically from your device (if none of the three is supported, it starts in English); the **flags** 🌐🇮🇹🇬🇧🇫🇷 in the ⋯ menu let you choose a specific one at any time.
+The app is available in **Italian**, **English**, **French** and **Spanish**. On first launch, the language is detected automatically from your device (if none of the four is supported, it starts in English); the **flags** 🌐🇮🇹🇬🇧🇫🇷🇪🇸 in the ⋯ menu let you choose a specific one at any time.
 
 **Team names**, if not customized, automatically follow the chosen language (e.g. "Team 1" becomes "Équipe 1" in French); a name you've typed yourself stays unchanged when switching language.
 

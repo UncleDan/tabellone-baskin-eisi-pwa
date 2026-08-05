@@ -48,11 +48,12 @@ Il Tabellone Baskin EISI esiste in **due repository**, che lavorano insieme:
 
 ## Funzioni
 
-Le istruzioni d'uso complete (schermata principale, impostazioni/correzioni, impostazioni partita, possesso e bonus, lingua, salvataggio automatico) sono nella **guida**, disponibile in tre lingue:
+Le istruzioni d'uso complete (schermata principale, impostazioni/correzioni, impostazioni partita, possesso e bonus, lingua, salvataggio automatico) sono nella **guida**, disponibile in quattro lingue:
 
 - 🇮🇹 [Guida in italiano](docs/guida-it.md)
 - 🇬🇧 [User guide in English](docs/guide-en.md)
 - 🇫🇷 [Guide en français](docs/guide-fr.md)
+- 🇪🇸 [Guía en español](docs/guia-es.md)
 
 La stessa guida è integrata **anche nell'app** (pulsante **Guida all'uso** nel menu `…`), disponibile offline e nella lingua attiva. Le due copie (repository e app) devono restare allineate: aggiornare entrambe quando cambia una funzione.
 
@@ -80,7 +81,8 @@ tabellone-baskin-eisi-pwa/
 ├── docs/
 │   ├── guida-it.md
 │   ├── guide-en.md
-│   └── guide-fr.md
+│   ├── guide-fr.md
+│   └── guia-es.md
 └── pwa/
     ├── index.html
     ├── manifest.webmanifest
@@ -106,7 +108,7 @@ tabellone-baskin-eisi-pwa/
 - **Valori predefiniti** (minuti, periodi, timeout, bonus): oggetto `DEFAULT_CONFIG` in `pwa/js/app.js`.
 - **Aggiornamenti**: a ogni rilascio incrementa `CACHE_NAME` in `pwa/service-worker.js` e `APP_VERSION` in `pwa/js/app.js` (versionamento per anno: `2026`, poi `2026a`, `2026b`, `2026c`… per i rilasci successivi nello stesso anno). Se aperta nel browser normale (non installata) si aggiorna da sola al ricaricamento; se installata come PWA non si aggiorna automaticamente (per non interrompere una partita in corso) e l'utente verifica da "Verifica aggiornamenti" nelle impostazioni, disinstallando e reinstallando l'app se ne trova una nuova.
 - **Compatibilità browser datati**: il layout usa `clamp()` per le dimensioni. Ogni dichiarazione ha un fallback fisso che la precede, così su motori privi di `clamp()` (Chrome < 79, WebView di sistema su Android 8/9) l'app resta usabile invece di mostrare loghi/icone a dimensione intrinseca. Mantenere questo schema (valore fisso prima, `clamp()` dopo) quando si aggiunge nuovo CSS dimensionale. Nota: su Chrome < 84 la spaziatura `gap` nei flexbox non è supportata, quindi alcuni elementi possono risultare più ravvicinati (degradazione solo estetica).
-- **Traduzioni**: dizionari in `pwa/js/i18n.js` (oggetto `I18N_DICT`, una chiave per lingua: `it`/`en`/`fr`). Per aggiungere una lingua: creare un nuovo blocco con le stesse chiavi di `it`, aggiungere il codice a `I18N_SUPPORTED`, e la nuova opzione comparirà automaticamente nel ciclo del pulsante **Lingua**. Il testo statico in `index.html` usa attributi `data-i18n`/`data-i18n-aria`/`data-i18n-placeholder`; il testo generato dinamicamente in `app.js` usa la funzione `t('chiave', {variabili})`.
+- **Traduzioni**: dizionari in `pwa/js/i18n.js` (oggetto `I18N_DICT`, una chiave per lingua: `it`/`en`/`fr`/`es`). Per aggiungere una lingua: creare un nuovo blocco con le stesse chiavi di `it`, aggiungere il codice a `I18N_SUPPORTED` e la relativa bandiera in `index.html` (`.lang-flag` con `data-lang`), poi creare la guida corrispondente in `docs/`. Il testo statico in `index.html` usa attributi `data-i18n`/`data-i18n-aria`/`data-i18n-placeholder`; il testo generato dinamicamente in `app.js` usa la funzione `t('chiave', {variabili})`.
 
 ---
 
@@ -272,4 +274,4 @@ Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub*
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
-**Versione:** 2026b
+**Versione:** 2026c

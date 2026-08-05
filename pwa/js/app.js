@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '2026b';
+const APP_VERSION = '2026c';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
