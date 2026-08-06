@@ -292,9 +292,7 @@ I suoni in `pwa/sounds/` sono CC0.
 
 Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub** del codice.
 
-
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
 **Versione:** 2026g
-
