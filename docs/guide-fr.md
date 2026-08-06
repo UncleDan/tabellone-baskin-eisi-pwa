@@ -1,6 +1,6 @@
 # 📋 Guide d'utilisation — Tabellone Baskin EISI (PWA)
 
-*[Versione italiana](guida-it.md) · [English version](guide-en.md) · [Versión española](guia-es.md)*
+*[Versione italiana](guida-it.md) · [English version](guide-en.md) · [Versión española](guia-es.md) · [Deutsche Version](guide-de.md)*
 
 Ce guide explique comment utiliser le tableau de marque pendant un match de Baskin. Pour l'installation, la publication et les détails techniques, voir le [README](../README.md).
 
@@ -47,7 +47,7 @@ Utilisez cet écran pour **corriger une erreur** ou préparer le match avant qu'
 
 ## 🌐 Langue
 
-L'application est disponible en **italien**, **anglais**, **français** et **espagnol**. Au premier lancement, la langue est détectée automatiquement à partir de celle de l'appareil (si aucune des quatre n'est prise en charge, elle démarre en anglais) ; les **drapeaux** 🌐🇮🇹🇬🇧🇫🇷🇪🇸 dans le menu ⋯ permettent d'en choisir une spécifique à tout moment.
+L'application est disponible en **italien**, **anglais**, **français**, **espagnol** et **allemand**. Au premier lancement, la langue est détectée automatiquement à partir de celle de l'appareil (si aucune des cinq n'est prise en charge, elle démarre en anglais) ; les **drapeaux** 🌐🇮🇹🇬🇧🇫🇷🇪🇸🇩🇪 dans le menu ⋯ permettent d'en choisir une spécifique à tout moment.
 
 Le **nom des équipes**, s'il n'est pas personnalisé, suit automatiquement la langue choisie (ex. « Squadra 1 » devient « Team 1 » en anglais) ; un nom saisi manuellement reste inchangé en changeant de langue.
 

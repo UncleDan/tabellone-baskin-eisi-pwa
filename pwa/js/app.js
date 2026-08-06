@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '2026c';
+const APP_VERSION = '2026d';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -1427,17 +1427,21 @@ onActivate($('#actScoreColor'), toggleScoreColor);
 onActivate($('#actMute'), toggleMute);
 /* selettore lingua diretto: ogni bandiera apre una conferma nella lingua DI
    DESTINAZIONE (non quella attiva), così chi conferma legge già il messaggio
-   nella lingua che otterrà e sa con certezza cosa aspettarsi. */
+   nella lingua che otterrà e sa con certezza cosa aspettarsi.
+   Il testo cambia se l'app è installata (si chiude davvero) oppure aperta nel
+   browser, dove window.close() viene bloccato: in quel caso si consiglia di
+   chiudere e riaprire manualmente. */
 let pendingLangChoice = null;
 document.querySelectorAll('.lang-flag').forEach(btn=>{
   onActivate(btn, ()=>{
-    const choice = btn.dataset.lang;                 // 'system' | 'it' | 'en' | 'fr'
+    const choice = btn.dataset.lang;                 // 'system' | 'it' | 'en' | 'fr' | 'es' | 'de'
     const resolvedLang = (choice === 'system') ? I18N.detectSystem() : choice;
     const langName = I18N.tFor(resolvedLang, 'lang_name');
+    const textKey = isStandalone() ? 'lang_confirm_text' : 'lang_confirm_text_browser';
     pendingLangChoice = choice;
     $('#langConfirmDialog').setAttribute('aria-label', I18N.tFor(resolvedLang, 'lang_confirm_title'));
     $('#langConfirmTitle').textContent = I18N.tFor(resolvedLang, 'lang_confirm_title');
-    $('#langConfirmText').textContent = I18N.tFor(resolvedLang, 'lang_confirm_text', {lang: langName});
+    $('#langConfirmText').textContent = I18N.tFor(resolvedLang, textKey, {lang: langName});
     $('#langConfirmYes').textContent = I18N.tFor(resolvedLang, 'lang_confirm_yes');
     $('#langConfirmCancel').textContent = I18N.tFor(resolvedLang, 'cancel');
     closeSheet('moreBackdrop');
@@ -1455,11 +1459,19 @@ onActivate($('#langConfirmYes'), ()=>{
   I18N.setPref(pendingLangChoice);
   pendingLangChoice = null;
   closeSheet('langConfirmBackdrop');
-  // come "Chiudi applicazione": salva e tenta la chiusura; se il browser la
-  // blocca (es. scheda normale, non installata), avvisa nella nuova lingua
   saveState();
-  try{ window.close(); }catch(e){}
-  setTimeout(()=>{ toast(t('toast_quit_hint')); }, 300);
+  if(isStandalone()){
+    // installata: la chiusura funziona davvero
+    try{ window.close(); }catch(e){}
+    setTimeout(()=>{ toast(t('toast_quit_hint')); }, 300);
+  } else {
+    // nel browser window.close() viene bloccato: applichiamo subito la nuova
+    // lingua all'interfaccia e lasciamo all'utente il consiglio già letto
+    // nella conferma (chiudere e riaprire per un caricamento pulito)
+    applyI18n();
+    renderAll();
+    updateLangHighlight();
+  }
 });
 /* evidenzia la bandiera/lingua attualmente attiva (richiamata anche ad ogni
    apertura del menu, non solo all'avvio: es. dopo un reset applicazione,

@@ -7,7 +7,7 @@
 'use strict';
 
 const I18N_LANG_KEY = 'tabellone-baskin-eisi:lang'; // 'system' | 'it' | 'en' | 'fr'
-const I18N_SUPPORTED = ['it', 'en', 'fr', 'es'];
+const I18N_SUPPORTED = ['it', 'en', 'fr', 'es', 'de'];
 
 const I18N_DICT = {
   it: {
@@ -143,7 +143,7 @@ const I18N_DICT = {
       '<li>Il <strong>bonus</strong> è indicato da un pallino per squadra accanto all\'etichetta "Falli".</li>' +
       '</ul>',
     guide_language_title: '🌐 Lingua',
-    guide_language_body: 'L\'app è disponibile in italiano, inglese, francese e spagnolo. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; le bandierine nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.',
+    guide_language_body: 'L\'app è disponibile in italiano, inglese, francese, spagnolo e tedesco. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; le bandierine nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.',
     guide_autosave_title: '💾 Salvataggio automatico',
     guide_autosave_body: 'Lo stato della partita viene salvato ad ogni comando, anche se l\'app va in background o si chiude inaspettatamente: alla riapertura si riprende esattamente da dove eri (a cronometro fermo, per sicurezza).',
     close: 'Chiudi',
@@ -204,6 +204,7 @@ const I18N_DICT = {
     confirm_quit: 'Chiudere l\'applicazione?',
     lang_confirm_title: 'Cambiare lingua?',
     lang_confirm_text: 'L\'app si chiuderà; alla riapertura sarà in {lang}.',
+    lang_confirm_text_browser: 'Chiudi e riapri l\'app per completare il cambio: alla riapertura sarà in {lang}.',
     lang_confirm_yes: 'Conferma',
     meta_description: 'Tabellone segnapunti per il Baskin: tempo, punti, timeout e bonus. Funziona offline.'
   },
@@ -333,7 +334,7 @@ const I18N_DICT = {
       '<li>The <strong>bonus</strong> is shown by one dot per team next to the "Fouls" label.</li>' +
       '</ul>',
     guide_language_title: '🌐 Language',
-    guide_language_body: 'The app is available in Italian, English, French and Spanish. On first launch, the language is detected automatically from your device; the flags in the ⋯ menu let you choose a specific one at any time.',
+    guide_language_body: 'The app is available in Italian, English, French, Spanish and German. On first launch, the language is detected automatically from your device; the flags in the ⋯ menu let you choose a specific one at any time.',
     guide_autosave_title: '💾 Automatic saving',
     guide_autosave_body: 'Match state is saved after every action, even if the app goes to the background or closes unexpectedly: reopening it picks up exactly where you left off (with the clock paused, for safety).',
     close: 'Close',
@@ -391,6 +392,7 @@ const I18N_DICT = {
     confirm_quit: 'Close the app?',
     lang_confirm_title: 'Change language?',
     lang_confirm_text: 'The app will close; when you reopen it, it will be in {lang}.',
+    lang_confirm_text_browser: 'Close and reopen the app to complete the change: it will then be in {lang}.',
     lang_confirm_yes: 'Confirm',
     meta_description: 'Scoreboard for Baskin: time, points, timeouts and bonus. Works offline.'
   },
@@ -520,7 +522,7 @@ const I18N_DICT = {
       '<li>Le <strong>bonus</strong> est indiqué par un point par équipe à côté du libellé « Fautes ».</li>' +
       '</ul>',
     guide_language_title: '🌐 Langue',
-    guide_language_body: 'L\'application est disponible en italien, anglais, français et espagnol. Au premier lancement, la langue est détectée automatiquement à partir de celle de l\'appareil ; les drapeaux dans le menu ⋯ permettent d\'en choisir une spécifique à tout moment.',
+    guide_language_body: 'L\'application est disponible en italien, anglais, français, espagnol et allemand. Au premier lancement, la langue est détectée automatiquement à partir de celle de l\'appareil ; les drapeaux dans le menu ⋯ permettent d\'en choisir une spécifique à tout moment.',
     guide_autosave_title: '💾 Sauvegarde automatique',
     guide_autosave_body: 'L\'état du match est enregistré après chaque action, même si l\'application passe en arrière-plan ou se ferme de manière inattendue : à la réouverture, vous reprenez exactement où vous en étiez (chronomètre en pause, par sécurité).',
     close: 'Fermer',
@@ -578,6 +580,7 @@ const I18N_DICT = {
     confirm_quit: 'Fermer l\'application ?',
     lang_confirm_title: 'Changer de langue ?',
     lang_confirm_text: 'L\'application va se fermer ; à la réouverture, elle sera en {lang}.',
+    lang_confirm_text_browser: 'Fermez puis rouvrez l\'application pour terminer le changement : elle sera alors en {lang}.',
     lang_confirm_yes: 'Confirmer',
     meta_description: 'Tableau de marque pour le Baskin : temps, points, temps morts et bonus. Fonctionne hors ligne.'
   },
@@ -707,7 +710,7 @@ const I18N_DICT = {
       '<li>El <strong>bonus</strong> se indica con un punto por equipo junto a la etiqueta «Faltas».</li>' +
       '</ul>',
     guide_language_title: '🌐 Idioma',
-    guide_language_body: 'La aplicación está disponible en italiano, inglés, francés y español. Al abrirla por primera vez, el idioma se detecta automáticamente del dispositivo; las banderas del menú ⋯ permiten elegir uno concreto en cualquier momento.',
+    guide_language_body: 'La aplicación está disponible en italiano, inglés, francés, español y alemán. Al abrirla por primera vez, el idioma se detecta automáticamente del dispositivo; las banderas del menú ⋯ permiten elegir uno concreto en cualquier momento.',
     guide_autosave_title: '💾 Guardado automático',
     guide_autosave_body: 'El estado del partido se guarda después de cada acción, incluso si la aplicación pasa a segundo plano o se cierra inesperadamente: al reabrirla se retoma exactamente donde lo dejaste (con el cronómetro detenido, por seguridad).',
     close: 'Cerrar',
@@ -765,8 +768,197 @@ const I18N_DICT = {
     confirm_quit: '¿Cerrar la aplicación?',
     lang_confirm_title: '¿Cambiar de idioma?',
     lang_confirm_text: 'La aplicación se cerrará; al volver a abrirla estará en {lang}.',
+    lang_confirm_text_browser: 'Cierra y vuelve a abrir la aplicación para completar el cambio: entonces estará en {lang}.',
     lang_confirm_yes: 'Confirmar',
     meta_description: 'Marcador para el Baskin: tiempo, puntos, tiempos muertos y bonus. Funciona sin conexión.'
+  },
+
+  de: {
+    lang_name: 'Deutsch',
+    lang_system: 'System',
+
+    aria_play_pause: 'Zeit starten oder stoppen',
+    aria_next_period: 'Nächstes Viertel',
+    aria_timer: 'Spielzeit',
+    aria_period: 'Viertel',
+    aria_open_settings: 'Einstellungen und Korrekturen öffnen',
+    aria_more_options: 'Weitere Optionen',
+    aria_confirm_exit_edit: 'Bestätigen und Einstellungen verlassen',
+
+    default_team_name: 'Team {n}',
+    aria_timeout_team: 'Auszeit {team}',
+    aria_possession_team: 'Ballbesitz {team}',
+    poss_label: 'Ballbesitz',
+    aria_bonus_team: 'Bonus {team}',
+    fouls_label: 'Fouls',
+    aria_add_foul: 'Foul hinzufügen {team}',
+    aria_remove_foul: 'Foul entfernen {team}',
+    color_label: 'Farbe {color}',
+    color_custom: 'Eigene Farbe',
+
+    aria_horn: 'Hupe ertönen lassen',
+    aria_whistle: 'Pfiff ertönen lassen',
+    aria_reset_match: 'Spiel zurücksetzen',
+
+    aria_confirm_reset: 'Zurücksetzen bestätigen',
+    reset_title: 'Spiel zurücksetzen?',
+    reset_text: 'Punkte, Fouls, Auszeiten, Zeit, Viertel, Teamnamen und -farben werden auf die Anfangswerte zurückgesetzt. Die Spieleinstellungen bleiben unverändert.',
+    yes_reset: 'Ja, zurücksetzen',
+    cancel: 'Abbrechen',
+
+    aria_confirm_next: 'Nächstes Viertel bestätigen',
+    next_title: 'Zum nächsten Viertel wechseln?',
+    next_text: 'Es geht weiter mit {label}, die Uhr wird auf die volle Zeit zurückgesetzt.',
+    period_label: '{n}. Viertel',
+    overtime_label: '{n}. Verlängerung (V{n})',
+    yes_next: 'Ja, weiter',
+
+    toast_end_of_time: 'Zeit abgelaufen',
+    toast_clock_running: 'Uhr läuft',
+    toast_timeout_unavailable: 'Keine Auszeit verfügbar',
+    toast_time_reset: 'Zeit zurückgesetzt',
+    toast_new_match: 'Neues Spiel',
+    toast_match_reset: 'Spiel zurückgesetzt',
+    toast_changes_saved: 'Änderungen gespeichert',
+    toast_baskincam_format: 'BaskinCam: empfohlenes Format IP:Port (z. B. 192.168.1.50:8080)',
+    toast_settings_saved: 'Einstellungen gespeichert',
+    toast_app_reset: 'App zurückgesetzt',
+    toast_use_browser_menu: 'Nutze das Browsermenü: „App installieren“ / „Zum Startbildschirm hinzufügen“',
+    toast_app_installed: 'App installiert',
+    toast_updates_unavailable: 'Updates nicht verfügbar',
+    toast_sw_inactive: 'Service Worker nicht aktiv',
+    toast_checking_updates: 'Suche nach Updates…',
+    toast_check_network: 'Prüfung nicht möglich: Verbindung überprüfen',
+    toast_check_failed: 'Updates konnten nicht geprüft werden',
+    toast_new_version: 'Neue Version verfügbar ({version}): App deinstallieren und neu installieren, um zu aktualisieren',
+    toast_up_to_date: 'Du bist auf dem neuesten Stand (v{version})',
+    toast_quit_hint: 'Zum Beenden das Fenster oder den Tab schließen',
+    toast_period_period: '{n}. Viertel',
+    toast_period_overtime: 'Verlängerung {n} (V{n})',
+
+    aria_info_dialog: 'Informationen',
+    info_title: 'Informationen',
+    version_label: 'Version',
+    btn_install: 'App installieren',
+    btn_about_baskin: 'Was ist Baskin',
+    btn_guide: 'Bedienungsanleitung',
+    btn_repo: 'Quellcode auf GitHub ↗',
+    btn_issues: 'Problem melden ↗',
+    btn_check_update: 'Nach Updates suchen',
+    btn_cast_connect: 'Adresse / QR für den TV',
+    btn_cast_role: 'Geräterolle…',
+    btn_wake: 'Bildschirm immer an:',
+    btn_score_color: 'Punkte in Teamfarbe:',
+    btn_mute: 'Ton:',
+    btn_language: 'Sprache:',
+    state_on: 'on',
+    state_off: 'off',
+    btn_match_settings: 'Spieleinstellungen',
+    btn_reset_app: 'App zurücksetzen',
+    btn_quit: 'App schließen',
+    btn_close_menu: 'Menü schließen',
+
+    aria_about_baskin_dialog: 'Was ist Baskin',
+    about_baskin_title: 'Was ist Baskin',
+    about_baskin_text: 'Baskin ist eine auf Basketball aufbauende Sportart, die von Grund auf inklusiv gestaltet ist: Ihr Regelwerk sieht die gleichzeitige Teilnahme aller Athletinnen und Athleten ohne Einteilung in Kategorien vor, dank eines Systems aus Rollen auf dem Spielfeld \u2014 Sportlerinnen und Sportler beiderlei Geschlechts, mit und ohne Behinderung, einschließlich körperlicher und/oder kognitiver Behinderungen, spielen gemeinsam auf demselben Feld dasselbe Spiel. Das Baskin-Regelwerk ist geistiges Eigentum der <em>Associazione Baskin</em>, und die Meisterschaften in Italien werden von <em>EISI - Ente Italiano Sport Inclusivi</em> organisiert, einem vom <em>Italienischen Paralympischen Komitee</em> anerkannten paralympischen Förderverband.',
+    logos_disclaimer: 'Die Logos „EISI“ und „Baskin“ sind eingetragene Marken von Ente Italiano Sport Inclusivi bzw. Associazione Baskin.',
+
+    aria_guide_dialog: 'Bedienungsanleitung',
+    guide_main_title: '🏟️ Hauptbildschirm',
+    guide_main_body: '<ul>' +
+      '<li><strong>▶️ / ⏸️</strong> startet oder stoppt die Uhr (auch mit der Leertaste).</li>' +
+      '<li>Nach Ablauf der Zeit erscheint <strong>⏭ Nächstes Viertel</strong>: nach Bestätigung geht es ein Viertel weiter und die Uhr wird auf die volle Zeit zurückgesetzt.</li>' +
+      '<li><strong>✏️</strong> öffnet die Einstellungen/Korrekturen. <strong>⋯</strong> öffnet dieses Menü.</li>' +
+      '<li><strong>+1 / +2 / +3</strong> erhöhen die Punkte des linken bzw. rechten Teams.</li>' +
+      '<li>Tippe auf die <strong>Auszeit-Anzeige</strong>, um eine weitere zu aktivieren; sind alle aktiv, setzt der nächste Tipp sie zurück.</li>' +
+      '<li>Die <strong>Foul</strong>-Tasten erscheinen nur, wenn die <em>Foulzählung</em> in den Einstellungen aktiv ist.</li>' +
+      '<li>Unten rechts: <strong>📣 Hupe</strong> und <strong>Pfiff</strong>, um die Töne manuell abzuspielen.</li>' +
+      '</ul>',
+    guide_edit_title: '⚙️ Einstellungen / Korrekturen (✏️)',
+    guide_edit_body: '<ul>' +
+      '<li>Die Uhr wird beim Öffnen dieses Bildschirms <strong>automatisch angehalten</strong>.</li>' +
+      '<li><strong>✔️</strong> speichert die Änderungen und kehrt zum Spielmodus zurück.</li>' +
+      '<li>Tippe auf die <strong>Zeit</strong> oder das <strong>Viertel</strong> (gestrichelte Felder), um die jeweiligen Auswahlräder zu öffnen.</li>' +
+      '<li>Tippe auf einen <strong>Teamnamen</strong>, um ihn zu ändern; darunter legt eine Farbreihe die Schriftfarbe fest.</li>' +
+      '<li><strong>−1 / −2 / −3</strong> verringern die Punkte.</li>' +
+      '<li>Unten links setzt <strong>Zurücksetzen</strong> (rot) das Spiel nach Bestätigung zurück.</li>' +
+      '</ul>',
+    guide_settings_title: '🏀 Spieleinstellungen (über das Menü ⋯)',
+    guide_settings_body: '<ul>' +
+      '<li><strong>Modus</strong>: Baskin (Standardwerte) oder Anpassen (alle Felder änderbar).</li>' +
+      '<li><strong>Auszeit-Logik</strong>: Baskin (Übertrag) oder Basket (Kontingent pro Halbzeit).</li>' +
+      '<li><strong>Bonus-Modus</strong>: letzte 2′ (Baskin), nach N Fouls (Basket) oder keiner.</li>' +
+      '<li>Dauer von Viertel/Verlängerung, Anzahl der Viertel, Auszeiten, Foulgrenze, automatische Hupe und automatischer Pfiff.</li>' +
+      '<li><strong>BaskinCam-Streaming</strong>: Übertragung des Spielstands an ein Begleitgerät im lokalen Netzwerk.</li>' +
+      '<li><strong>App zurücksetzen</strong>: löscht alles und stellt die Baskin-Standardeinstellungen wieder her.</li>' +
+      '</ul>',
+    guide_possession_title: '🔄 Ballbesitz und Bonus',
+    guide_possession_body: '<ul>' +
+      '<li>Die <strong>Ballbesitzpfeile</strong>: Tippen auf einen aktiviert diesen und deaktiviert den anderen.</li>' +
+      '<li>Der <strong>Bonus</strong> wird durch einen Punkt pro Team neben der Beschriftung „Fouls“ angezeigt.</li>' +
+      '</ul>',
+    guide_language_title: '🌐 Sprache',
+    guide_language_body: 'Die App ist auf Italienisch, Englisch, Französisch, Spanisch und Deutsch verfügbar. Beim ersten Start wird die Sprache automatisch vom Gerät erkannt; über die Flaggen im Menü ⋯ lässt sich jederzeit eine bestimmte Sprache wählen.',
+    guide_autosave_title: '💾 Automatisches Speichern',
+    guide_autosave_body: 'Der Spielstand wird nach jeder Aktion gespeichert, auch wenn die App in den Hintergrund wechselt oder unerwartet geschlossen wird: Beim erneuten Öffnen geht es genau dort weiter, wo du aufgehört hast (die Uhr steht dabei sicherheitshalber still).',
+    close: 'Schließen',
+
+    aria_match_settings_dialog: 'Spieleinstellungen',
+    match_settings_title: 'Spieleinstellungen',
+    preset_baskin: 'Baskin',
+    preset_custom: 'Anpassen',
+    match_params_title: 'Spielparameter',
+    field_minutes: 'Viertellänge (Minuten)',
+    field_periods: 'Anzahl der Viertel',
+    field_overtime: 'Länge der Verlängerung (Minuten)',
+    field_timeouts_half: 'Auszeiten pro Halbzeit (1./2.)',
+    field_timeouts_ot: 'Auszeiten pro Verlängerung',
+    field_timeout_mode: 'Auszeit-Logik',
+    timeout_mode_baskin: 'Baskin (Übertrag)',
+    timeout_mode_basket: 'Basket (Kontingent pro Halbzeit)',
+    field_bonus_mode: 'Bonus-Modus',
+    bonus_mode_last2: 'Letzte 2′ (Baskin)',
+    bonus_mode_teamfouls: 'Nach N Fouls (Basket)',
+    bonus_mode_off: 'Keiner',
+    field_bonus: 'Fouls für den Bonus (Basket)',
+    field_manual_fouls: 'Foulzählung',
+    field_reset_fouls: 'Fouls in jedem Viertel zurücksetzen',
+    field_possession: 'Wechselnde Ballbesitzpfeile',
+    field_auto_whistle_timeout: 'Automatischer Pfiff bei nicht verfügbarer Auszeit',
+    field_auto_horn: 'Automatische Hupe bei Zeitablauf',
+    baskincam_title: 'BaskinCam-Streaming',
+    field_baskincam_enable: 'Übertragung an BaskinCam aktivieren',
+    field_baskincam_host: 'BaskinCam-Adresse (IP:Port)',
+    save: 'Speichern',
+
+    aria_time_editor_dialog: 'Zeit einstellen',
+    time_editor_title: 'Zeit einstellen',
+    rotor_min: 'Min',
+    rotor_sec: 'Sek',
+    rotor_dec: 'Zehntel',
+    apply: 'Anwenden',
+    full_time: 'Volle Zeit',
+    aria_period_editor_dialog: 'Viertel einstellen',
+    period_editor_title: 'Viertel einstellen',
+    rotor_period: 'Viertel',
+
+    aria_rotate_dialog: 'Gerät ins Querformat drehen',
+    rotate_title: 'Gerät drehen',
+    rotate_sub: 'Die Anzeigetafel funktioniert im Querformat',
+
+    toast_sound_on: 'Ton an',
+    toast_sound_off: 'Ton aus',
+    toast_manual_fouls_on: 'Foulzählung aktiviert',
+    toast_manual_fouls_off: 'Foulzählung deaktiviert',
+    toast_score_color_on: 'Punkte in Teamfarbe',
+    toast_score_color_off: 'Punkte in Grün',
+    confirm_reset_app: 'App zurücksetzen: löscht Punkte, Fouls, Auszeiten, Ballbesitz, Teamnamen und stellt die Baskin-Standardeinstellungen wieder her. Fortfahren?',
+    confirm_quit: 'App schließen?',
+    lang_confirm_title: 'Sprache wechseln?',
+    lang_confirm_text: 'Die App wird geschlossen; beim erneuten Öffnen ist sie auf {lang}.',
+    lang_confirm_text_browser: 'Schließe die App und öffne sie erneut, um den Wechsel abzuschließen: danach ist sie auf {lang}.',
+    lang_confirm_yes: 'Bestätigen',
+    meta_description: 'Anzeigetafel für Baskin: Zeit, Punkte, Auszeiten und Bonus. Funktioniert offline.'
   }
 };
 

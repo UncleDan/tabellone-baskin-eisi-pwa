@@ -1,6 +1,6 @@
 # 📋 Guida all'uso — Tabellone Baskin EISI (PWA)
 
-*[English version](guide-en.md) · [Version française](guide-fr.md) · [Versión española](guia-es.md)*
+*[English version](guide-en.md) · [Version française](guide-fr.md) · [Versión española](guia-es.md) · [Deutsche Version](guide-de.md)*
 
 Questa guida spiega come usare il tabellone segnapunti durante una partita di Baskin. Per l'installazione, la pubblicazione e i dettagli tecnici vedi il [README](../README.md).
 
@@ -47,7 +47,7 @@ Si usa per **correggere** un errore o preparare la partita prima di iniziare.
 
 ## 🌐 Lingua
 
-L'app è disponibile in **italiano**, **inglese**, **francese** e **spagnolo**. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo (se non è tra le quattro supportate, parte in inglese); le **bandierine** 🌐🇮🇹🇬🇧🇫🇷🇪🇸 nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.
+L'app è disponibile in **italiano**, **inglese**, **francese**, **spagnolo** e **tedesco**. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo (se non è tra le cinque supportate, parte in inglese); le **bandierine** 🌐🇮🇹🇬🇧🇫🇷🇪🇸🇩🇪 nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.
 
 Il **nome delle squadre**, se non personalizzato, segue automaticamente la lingua scelta (es. "Squadra 1" diventa "Team 1" in inglese); un nome scritto a mano resta invece invariato cambiando lingua.
 
