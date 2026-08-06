@@ -13,7 +13,7 @@ Dieser Bildschirm wird **während des Spiels** verwendet.
 - **▶️ / ⏸️** — startet oder stoppt die Uhr (auch mit der Leertaste).
 - Nach **Ablauf der Zeit** (nach der automatischen Hupe) erscheint **⏭ Nächstes Viertel**: nach Bestätigung geht es ein Viertel weiter und die Uhr wird auf die volle Zeit zurückgesetzt. Am Ende des 4. Viertels und jeder Verlängerung (`V1`, `V2`…) wird dies nur **bei Gleichstand** angeboten.
 - **✏️** öffnet die Einstellungen/Korrekturen. **⋯** öffnet das Menü mit Version, Updates und weiteren Optionen.
-- **+1 / +2 / +3** links und rechts erhöhen die Punkte von Team 1 bzw. Team 2.
+- **+1 / +2 / +3** links und rechts erhöhen die Punkte der Heim- bzw. der Gastmannschaft.
 - Tippe auf die **Auszeit-Anzeige**: sie aktiviert einen weiteren Punkt; sind alle aktiv, setzt der nächste Tipp sie zurück.
 - Die **Foul**-Tasten (**+** / **−**) erscheinen nur, wenn die *Foulzählung* in den Spieleinstellungen aktiv ist. Standardmäßig sind sie aus: es bleiben nur die Beschriftung „Fouls“ und die Bonuspunkte.
 - Unten rechts: **📣 Hupe** und **Pfiff**, um die jeweiligen Töne manuell abzuspielen.
@@ -51,7 +51,7 @@ Die App ist auf **Italienisch**, **Englisch**, **Französisch**, **Spanisch** un
 
 Wird die App mit dem Parameter `?lang=` in der Adresse geöffnet (z. B. `?lang=de`), gilt diese Sprache nur für diese Öffnung, ohne die gespeicherte Einstellung zu ändern: praktisch für Direktlinks, QR-Codes oder einen Zweitbildschirm in einer anderen Sprache.
 
-Die **Teamnamen** folgen automatisch der gewählten Sprache, solange sie nicht angepasst wurden (z. B. wird aus „Squadra 1“ auf Deutsch „Team 1“); ein selbst eingegebener Name bleibt beim Sprachwechsel unverändert.
+Die **Standard-Mannschaftsnamen** sind „Heim“ und „Gast“ (die übliche Anzeigetafel-Terminologie) und folgen automatisch der gewählten Sprache: „Home“/„Away“ auf Englisch, „Casa“/„Ospiti“ auf Italienisch. Ein selbst eingegebener Name bleibt beim Sprachwechsel unverändert.
 
 ## 💾 Automatisches Speichern
 

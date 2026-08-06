@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '2026f';
+const APP_VERSION = '2026g';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -109,7 +109,7 @@ function freshState(cfg){
     bonusActive: [false, false],  // bonus per squadra (modalita' 'teamFouls')
     possession: [false, false],   // freccia possesso: [sinistra, destra]
     toPhase: 'h1',           // fase a cui si riferisce timeoutsUsed
-    names: [t('default_team_name',{n:1}), t('default_team_name',{n:2})],
+    names: [t('team_home'), t('team_away')],
     namesCustom: [false, false],    // true se il nome è stato personalizzato dall'utente
     colors: ['#ffffff', '#ffffff']   // colore della scritta nome, per squadra
   };
@@ -151,12 +151,18 @@ function loadState(){
         s.config.configMode = 'custom';
       }
       s.running = false;            // non si riprende mai "in corsa"
-      if(!Array.isArray(s.names)) s.names = ['Squadra 1','Squadra 2'];
+      if(!Array.isArray(s.names)) s.names = [t('team_home'), t('team_away')];
       // migrazione: namesCustom assente -> dedotto controllando se il nome
-      // salvato è uno dei default noti in una qualsiasi delle lingue supportate
-      // (se sì, resta "non personalizzato" e continuerà a tradursi da solo)
+      // salvato è uno dei default noti (attuali casa/ospiti in una qualsiasi
+      // lingua, o i vecchi "Squadra 1/2" numerati delle versioni precedenti).
+      // Se è un default, resta "non personalizzato" e continuerà a tradursi da solo.
       if(!Array.isArray(s.namesCustom)){
-        const knownDefaults = [1,2].map(n => I18N_SUPPORTED.map(l => I18N_DICT[l].default_team_name.replace('{n}', n)));
+        const LEGACY = [
+          ['Squadra 1','Team 1','Équipe 1','Equipo 1','Mannschaft 1'],
+          ['Squadra 2','Team 2','Équipe 2','Equipo 2','Mannschaft 2']
+        ];
+        const knownDefaults = [0,1].map(i =>
+          I18N_SUPPORTED.map(l => I18N_DICT[l][i===0 ? 'team_home' : 'team_away']).concat(LEGACY[i]));
         s.namesCustom = [0,1].map(i => !knownDefaults[i].includes((s.names[i]||'').trim()));
       }
       if(!Array.isArray(s.colors)) s.colors = ['#ffffff','#ffffff'];
@@ -175,7 +181,7 @@ function loadState(){
    nella lingua corrente (si aggiorna da solo cambiando lingua); se personalizzato,
    il testo scelto dall'utente. */
 function getTeamName(i){
-  return state.namesCustom[i] ? state.names[i] : t('default_team_name', {n: i+1});
+  return state.namesCustom[i] ? state.names[i] : t(i === 0 ? 'team_home' : 'team_away');
 }
 /* variante di phaseKey utilizzabile prima che 'state' sia assegnato */
 function phaseKeyFor(s, period){
@@ -840,7 +846,7 @@ function resetClock(){
 function newGame(){
   stopClock();
   state = freshState(state.config);
-  state.names = state.names || ['Squadra 1','Squadra 2'];
+  state.names = state.names || [t('team_home'), t('team_away')];
   renderAll();
   saveState();
   toast(t('toast_new_match'));
@@ -957,7 +963,7 @@ function enterEdit(){
 }
 function exitEdit(){
   // assicura nomi validi: se vuoto, torna al default (auto-tradotto)
-  for(let i=0;i<2;i++){ if(!state.names[i].trim()){ state.names[i] = t('default_team_name',{n:i+1}); state.namesCustom[i] = false; } }
+  for(let i=0;i<2;i++){ if(!state.names[i].trim()){ state.namesCustom[i] = false; state.names[i] = getTeamName(i); } }
   body.classList.remove('mode-edit');
   body.classList.add('mode-game');
   renderAll();

@@ -13,7 +13,7 @@ Questa guida spiega come usare il tabellone segnapunti durante una partita di Ba
 - **▶️ / ⏸️** — avvia o ferma il cronometro (anche con la barra spaziatrice sulla tastiera).
 - A **fine tempo** (dopo la sirena automatica) compare **⏭ Periodo successivo**: con conferma avanza di un periodo e riporta il cronometro al tempo pieno. A fine 4° quarto e di ogni supplementare (`1TS`, `2TS`…) viene proposto **solo in caso di parità**.
 - **✏️** apre le impostazioni/correzioni. **⋯** apre il menu con versione, aggiornamenti e altre opzioni.
-- **+1 / +2 / +3** a sinistra e a destra aumentano il punteggio della Squadra 1 e della Squadra 2.
+- **+1 / +2 / +3** a sinistra e a destra aumentano il punteggio della squadra di casa e di quella ospite.
 - Tocca la **pillola dei timeout**: accende un pallino in più; quando sono tutti accesi, il tocco successivo li azzera.
 - I tasti dei **falli** (**+** / **−**) compaiono solo se il *Conteggio falli* è attivo nelle impostazioni partita. Di default sono spenti: restano solo l'etichetta "Falli" e i pallini del bonus.
 - In basso a destra: **📣 sirena** e **fischietto**, per riprodurre i rispettivi suoni manualmente.
@@ -51,7 +51,7 @@ L'app è disponibile in **italiano**, **inglese**, **francese**, **spagnolo** e 
 
 Aprendo l'app con il parametro `?lang=` nell'indirizzo (es. `?lang=de`) si forza una lingua solo per quella apertura, senza modificare la preferenza salvata: utile per link diretti, QR code o per uno schermo in una lingua diversa.
 
-Il **nome delle squadre**, se non personalizzato, segue automaticamente la lingua scelta (es. "Squadra 1" diventa "Team 1" in inglese); un nome scritto a mano resta invece invariato cambiando lingua.
+I **nomi predefiniti delle squadre** sono "Casa" e "Ospiti" (la terminologia dei tabelloni) e seguono automaticamente la lingua scelta: in inglese diventano "Home"/"Away", in tedesco "Heim"/"Gast". Un nome scritto a mano resta invece invariato cambiando lingua.
 
 ## 💾 Salvataggio automatico
 

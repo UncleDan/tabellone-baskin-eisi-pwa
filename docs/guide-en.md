@@ -13,7 +13,7 @@ This is the screen you use **during the match**.
 - **▶️ / ⏸️** — start or stop the clock (also works with the spacebar).
 - When **time runs out** (after the automatic horn), an **⏭ Next period** button appears: with confirmation, it advances one period and resets the clock to full time. At the end of the 4th quarter and of every overtime (`OT1`, `OT2`…), it's only offered **if the score is tied**.
 - **✏️** opens settings/corrections. **⋯** opens the menu with version info, updates and other options.
-- **+1 / +2 / +3** on the left and right increase Team 1's and Team 2's score.
+- **+1 / +2 / +3** on the left and right increase the home and away team's score.
 - Tap the **timeout pill**: it lights up one more dot; once all are lit, the next tap resets them.
 - The **foul** buttons (**+** / **−**) only appear if *Foul count* is enabled in match settings. They're off by default: only the "Fouls" label and the bonus dots remain.
 - Bottom right: **📣 horn** and **whistle**, to play the respective sounds manually.
@@ -51,7 +51,7 @@ The app is available in **Italian**, **English**, **French**, **Spanish** and **
 
 Opening the app with the `?lang=` parameter in the address (e.g. `?lang=de`) forces a language for that session only, without changing the saved preference: handy for direct links, QR codes or a secondary screen in a different language.
 
-**Team names**, if not customized, automatically follow the chosen language (e.g. "Team 1" becomes "Équipe 1" in French); a name you've typed yourself stays unchanged when switching language.
+The **default team names** are "Home" and "Away" (standard scoreboard terminology) and follow the chosen language automatically: "Casa"/"Ospiti" in Italian, "Heim"/"Gast" in German. A name you've typed yourself stays unchanged when switching language.
 
 ## 💾 Automatic saving
 

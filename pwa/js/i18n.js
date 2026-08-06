@@ -24,7 +24,8 @@ const I18N_DICT = {
     aria_confirm_exit_edit: 'Conferma ed esci dalle impostazioni',
 
     // squadre / punteggio
-    default_team_name: 'Squadra {n}',
+    team_home: 'Casa',
+    team_away: 'Ospiti',
     aria_timeout_team: 'Timeout {team}',
     aria_possession_team: 'Possesso {team}',
     poss_label: 'Possesso',
@@ -220,7 +221,8 @@ const I18N_DICT = {
     aria_more_options: 'More options',
     aria_confirm_exit_edit: 'Confirm and exit settings',
 
-    default_team_name: 'Team {n}',
+    team_home: 'Home',
+    team_away: 'Away',
     aria_timeout_team: 'Timeout {team}',
     aria_possession_team: 'Possession {team}',
     poss_label: 'Possession',
@@ -407,7 +409,8 @@ const I18N_DICT = {
     aria_more_options: 'Autres options',
     aria_confirm_exit_edit: 'Valider et quitter les réglages',
 
-    default_team_name: 'Équipe {n}',
+    team_home: 'Locaux',
+    team_away: 'Visiteurs',
     aria_timeout_team: 'Temps mort {team}',
     aria_possession_team: 'Possession {team}',
     poss_label: 'Possession',
@@ -594,7 +597,8 @@ const I18N_DICT = {
     aria_more_options: 'Más opciones',
     aria_confirm_exit_edit: 'Confirmar y salir de los ajustes',
 
-    default_team_name: 'Equipo {n}',
+    team_home: 'Local',
+    team_away: 'Visitante',
     aria_timeout_team: 'Tiempo muerto {team}',
     aria_possession_team: 'Posesión {team}',
     poss_label: 'Posesión',
@@ -781,7 +785,8 @@ const I18N_DICT = {
     aria_more_options: 'Weitere Optionen',
     aria_confirm_exit_edit: 'Bestätigen und Einstellungen verlassen',
 
-    default_team_name: 'Team {n}',
+    team_home: 'Heim',
+    team_away: 'Gast',
     aria_timeout_team: 'Auszeit {team}',
     aria_possession_team: 'Ballbesitz {team}',
     poss_label: 'Ballbesitz',
@@ -1031,7 +1036,7 @@ function applyI18n(){
     const teamN = el.getAttribute('data-i18n-team');
     const colorV = el.getAttribute('data-i18n-color');
     let vars;
-    if(teamN) vars = { team: t('default_team_name', { n: teamN }) };
+    if(teamN) vars = { team: t(teamN === '1' ? 'team_home' : 'team_away') };
     else if(colorV) vars = { color: colorV };
     el.setAttribute('aria-label', t(key, vars));
   });

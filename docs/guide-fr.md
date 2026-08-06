@@ -13,7 +13,7 @@ C'est l'écran utilisé **pendant le match**.
 - **▶️ / ⏸️** — démarre ou arrête le chronomètre (fonctionne aussi avec la barre d'espace).
 - Quand le **temps est écoulé** (après la sirène automatique), un bouton **⏭ Période suivante** apparaît : après confirmation, il passe à la période suivante et remet le chronomètre à temps plein. À la fin du 4e quart-temps et de chaque prolongation (`TS1`, `TS2`…), il n'est proposé **qu'en cas d'égalité**.
 - **✏️** ouvre les réglages/corrections. **⋯** ouvre le menu avec la version, les mises à jour et d'autres options.
-- **+1 / +2 / +3** à gauche et à droite augmentent le score de l'Équipe 1 et de l'Équipe 2.
+- **+1 / +2 / +3** à gauche et à droite augmentent le score de l'équipe locale et de l'équipe visiteuse.
 - Touchez la **pastille des temps morts** : elle allume un point de plus ; une fois tous allumés, l'appui suivant les réinitialise.
 - Les boutons de **fautes** (**+** / **−**) n'apparaissent que si le *Comptage des fautes* est activé dans les réglages du match. Ils sont désactivés par défaut : seuls le libellé « Fautes » et les points de bonus restent affichés.
 - En bas à droite : **📣 sirène** et **sifflet**, pour jouer les sons respectifs manuellement.
@@ -51,7 +51,7 @@ L'application est disponible en **italien**, **anglais**, **français**, **espag
 
 Ouvrir l'application avec le paramètre `?lang=` dans l'adresse (ex. `?lang=de`) force une langue pour cette ouverture uniquement, sans modifier la préférence enregistrée : pratique pour des liens directs, des QR codes ou un écran secondaire dans une autre langue.
 
-Le **nom des équipes**, s'il n'est pas personnalisé, suit automatiquement la langue choisie (ex. « Squadra 1 » devient « Team 1 » en anglais) ; un nom saisi manuellement reste inchangé en changeant de langue.
+Les **noms d'équipe par défaut** sont « Locaux » et « Visiteurs » (la terminologie des tables de marque) et suivent automatiquement la langue choisie : « Home »/« Away » en anglais, « Heim »/« Gast » en allemand. Un nom saisi manuellement reste inchangé en changeant de langue.
 
 ## 💾 Sauvegarde automatique
 

@@ -13,7 +13,7 @@ Es la pantalla que se usa **durante el partido**.
 - **▶️ / ⏸️** — inicia o detiene el cronómetro (también con la barra espaciadora).
 - Al **acabar el tiempo** (tras la bocina automática) aparece **⏭ Periodo siguiente**: con confirmación avanza un periodo y devuelve el cronómetro al tiempo completo. Al final del 4º cuarto y de cada prórroga (`TS1`, `TS2`…) solo se ofrece **en caso de empate**.
 - **✏️** abre los ajustes/correcciones. **⋯** abre el menú con la versión, las actualizaciones y otras opciones.
-- **+1 / +2 / +3** a la izquierda y a la derecha aumentan la puntuación del Equipo 1 y del Equipo 2.
+- **+1 / +2 / +3** a la izquierda y a la derecha aumentan la puntuación del equipo local y del visitante.
 - Toca la **pastilla de tiempos muertos**: enciende un punto más; cuando están todos encendidos, el siguiente toque los reinicia.
 - Los botones de **faltas** (**+** / **−**) solo aparecen si el *Recuento de faltas* está activado en los ajustes del partido. Por defecto están desactivados: quedan solo la etiqueta «Faltas» y los puntos del bonus.
 - Abajo a la derecha: **📣 bocina** y **silbato**, para reproducir los sonidos manualmente.
@@ -51,7 +51,7 @@ La aplicación está disponible en **italiano**, **inglés**, **francés**, **es
 
 Al abrir la aplicación con el parámetro `?lang=` en la dirección (p. ej. `?lang=de`) se fuerza un idioma solo para esa apertura, sin modificar la preferencia guardada: útil para enlaces directos, códigos QR o una pantalla secundaria en otro idioma.
 
-El **nombre de los equipos**, si no se ha personalizado, sigue automáticamente el idioma elegido (p. ej. «Squadra 1» pasa a «Equipo 1» en español); un nombre escrito a mano permanece invariable al cambiar de idioma.
+Los **nombres predeterminados de los equipos** son «Local» y «Visitante» (la terminología de los marcadores) y siguen automáticamente el idioma elegido: «Home»/«Away» en inglés, «Heim»/«Gast» en alemán. Un nombre escrito a mano permanece invariable al cambiar de idioma.
 
 ## 💾 Guardado automático
 

@@ -86,9 +86,9 @@
       </div>
 
       <div class="team" data-team="1">
-        <div class="team-name editable" id="name1" role="button" tabindex="0">Squadra 1</div>
+        <div class="team-name editable" id="name1" role="button" tabindex="0">Casa</div>
         <div class="score" id="score1" data-team="1"></div>
-        <div class="timeouts" id="timeouts1" data-team="1" data-i18n-aria="aria_timeout_team" data-i18n-team="1" aria-label="Timeout Squadra 1"></div>
+        <div class="timeouts" id="timeouts1" data-team="1" data-i18n-aria="aria_timeout_team" data-i18n-team="1" aria-label="Timeout Casa"></div>
       </div>
 
       <div class="vs" aria-hidden="true">
@@ -96,9 +96,9 @@
       </div>
 
       <div class="team" data-team="2">
-        <div class="team-name editable" id="name2" role="button" tabindex="0">Squadra 2</div>
+        <div class="team-name editable" id="name2" role="button" tabindex="0">Ospiti</div>
         <div class="score" id="score2" data-team="2"></div>
-        <div class="timeouts" id="timeouts2" data-team="2" data-i18n-aria="aria_timeout_team" data-i18n-team="2" aria-label="Timeout Squadra 2"></div>
+        <div class="timeouts" id="timeouts2" data-team="2" data-i18n-aria="aria_timeout_team" data-i18n-team="2" aria-label="Timeout Ospiti"></div>
       </div>
 
       <div class="side-buttons" id="ptsRight" data-team="2">
@@ -114,30 +114,30 @@
 
     <!-- ============ POSSESSO (sopra ai falli) ============ -->
     <div class="possession" id="possession" hidden>
-      <span class="poss-arrow left" id="possLeft" role="button" tabindex="0" data-i18n-aria="aria_possession_team" data-i18n-team="1" aria-label="Possesso Squadra 1">&#9664;</span>
+      <span class="poss-arrow left" id="possLeft" role="button" tabindex="0" data-i18n-aria="aria_possession_team" data-i18n-team="1" aria-label="Possesso Casa">&#9664;</span>
       <span class="poss-label" data-i18n="poss_label">Possesso</span>
-      <span class="poss-arrow right" id="possRight" role="button" tabindex="0" data-i18n-aria="aria_possession_team" data-i18n-team="2" aria-label="Possesso Squadra 2">&#9654;</span>
+      <span class="poss-arrow right" id="possRight" role="button" tabindex="0" data-i18n-aria="aria_possession_team" data-i18n-team="2" aria-label="Possesso Ospiti">&#9654;</span>
     </div>
 
     <!-- ============ FALLI / BONUS ============ -->
     <footer class="fouls">
       <div class="fouls-head">
         <img src="icons/logos/logo-eisi.svg" alt="" aria-hidden="true" class="brand-logo brand-logo-eisi" />
-        <span class="bonus-dot left" id="bonusLeft" data-i18n-aria="aria_bonus_team" data-i18n-team="1" aria-label="Bonus Squadra 1"></span>
+        <span class="bonus-dot left" id="bonusLeft" data-i18n-aria="aria_bonus_team" data-i18n-team="1" aria-label="Bonus Casa"></span>
         <span class="fouls-label" data-i18n="fouls_label">Falli</span>
-        <span class="bonus-dot right" id="bonusRight" data-i18n-aria="aria_bonus_team" data-i18n-team="2" aria-label="Bonus Squadra 2"></span>
+        <span class="bonus-dot right" id="bonusRight" data-i18n-aria="aria_bonus_team" data-i18n-team="2" aria-label="Bonus Ospiti"></span>
         <img src="icons/logos/logo-baskin.svg" alt="" aria-hidden="true" class="brand-logo brand-logo-baskin" />
       </div>
       <div class="fouls-body">
-        <button class="foul-btn only-game" type="button" data-team="0" data-delta="1" data-i18n-aria="aria_add_foul" data-i18n-team="1" aria-label="Aggiungi fallo Squadra 1">+</button>
-        <button class="foul-btn only-edit" type="button" data-team="0" data-delta="-1" data-i18n-aria="aria_remove_foul" data-i18n-team="1" aria-label="Togli fallo Squadra 1">&minus;</button>
+        <button class="foul-btn only-game" type="button" data-team="0" data-delta="1" data-i18n-aria="aria_add_foul" data-i18n-team="1" aria-label="Aggiungi fallo Casa">+</button>
+        <button class="foul-btn only-edit" type="button" data-team="0" data-delta="-1" data-i18n-aria="aria_remove_foul" data-i18n-team="1" aria-label="Togli fallo Casa">&minus;</button>
         <div class="foul-num" id="foul1" data-team="1"></div>
         <div class="foul-x" aria-hidden="true">
           <svg viewBox="0 0 100 120"><g stroke="#fff" stroke-width="11" stroke-linecap="round"><line x1="30" y1="38" x2="70" y2="82"/><line x1="70" y1="38" x2="30" y2="82"/></g></svg>
         </div>
         <div class="foul-num" id="foul2" data-team="2"></div>
-        <button class="foul-btn only-game" type="button" data-team="1" data-delta="1" data-i18n-aria="aria_add_foul" data-i18n-team="2" aria-label="Aggiungi fallo Squadra 2">+</button>
-        <button class="foul-btn only-edit" type="button" data-team="1" data-delta="-1" data-i18n-aria="aria_remove_foul" data-i18n-team="2" aria-label="Togli fallo Squadra 2">&minus;</button>
+        <button class="foul-btn only-game" type="button" data-team="1" data-delta="1" data-i18n-aria="aria_add_foul" data-i18n-team="2" aria-label="Aggiungi fallo Ospiti">+</button>
+        <button class="foul-btn only-edit" type="button" data-team="1" data-delta="-1" data-i18n-aria="aria_remove_foul" data-i18n-team="2" aria-label="Togli fallo Ospiti">&minus;</button>
       </div>
     </footer>
 
@@ -222,7 +222,7 @@
       <h2 data-i18n="info_title">Informazioni</h2>
       <div class="about">
         <p class="about-title">Tabellone Baskin EISI (PWA)</p>
-        <p class="about-meta"><span data-i18n="version_label">Versione</span> <span id="aboutVersion">2026f</span> — Daniele Lolli (UncleDan)</p>
+        <p class="about-meta"><span data-i18n="version_label">Versione</span> <span id="aboutVersion">2026g</span> — Daniele Lolli (UncleDan)</p>
       </div>
       <!-- verdi: installazione / info / sorgenti / segnalazioni / aggiornamenti -->
       <button class="sheet-item green" id="actInstall" type="button" data-i18n="btn_install" hidden>Installa app</button>
