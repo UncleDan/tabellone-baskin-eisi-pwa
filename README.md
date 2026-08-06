@@ -114,6 +114,25 @@ tabellone-baskin-eisi-pwa/
 
 ---
 
+## Lingua da URL (`?lang=xx`)
+
+Aprendo la PWA con il parametro `?lang=` si forza la lingua per quella apertura,
+scavalcando sia la lingua di sistema sia la preferenza salvata nel menu:
+
+```
+…/pwa/?lang=de          → tabellone in tedesco
+…/pwa/?display=1&lang=es → schermo in sola visualizzazione, in spagnolo
+```
+
+Valori ammessi: `it`, `en`, `fr`, `es`, `de` (un valore non supportato viene
+semplicemente ignorato e vale il comportamento normale). L'override **non
+modifica la preferenza salvata**: è utile per link diretti, QR code o per lo
+schermo Cast in un contesto linguistico diverso da quello del dispositivo che
+gestisce la partita. Se l'utente sceglie una lingua dal menu mentre il parametro
+è attivo, il parametro viene rimosso dall'URL, così la scelta manuale ha effetto.
+
+---
+
 ## Modalità sola visualizzazione (`?display=1`)
 
 Aprendo la PWA con il parametro `?display=1` (es. `…/tabellone-baskin/?display=1`) si
@@ -276,4 +295,4 @@ Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub*
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
-**Versione:** 2026d
+**Versione:** 2026e

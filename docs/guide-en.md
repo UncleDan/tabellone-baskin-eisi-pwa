@@ -49,6 +49,8 @@ Use this to **fix a mistake** or set up the match before it starts.
 
 The app is available in **Italian**, **English**, **French**, **Spanish** and **German**. On first launch, the language is detected automatically from your device (if none of the five is supported, it starts in English); the **flags** 🌐🇮🇹🇬🇧🇫🇷🇪🇸🇩🇪 in the ⋯ menu let you choose a specific one at any time.
 
+Opening the app with the `?lang=` parameter in the address (e.g. `?lang=de`) forces a language for that session only, without changing the saved preference: handy for direct links, QR codes or a secondary screen in a different language.
+
 **Team names**, if not customized, automatically follow the chosen language (e.g. "Team 1" becomes "Équipe 1" in French); a name you've typed yourself stays unchanged when switching language.
 
 ## 💾 Automatic saving

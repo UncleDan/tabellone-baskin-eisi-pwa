@@ -143,7 +143,7 @@ const I18N_DICT = {
       '<li>Il <strong>bonus</strong> è indicato da un pallino per squadra accanto all\'etichetta "Falli".</li>' +
       '</ul>',
     guide_language_title: '🌐 Lingua',
-    guide_language_body: 'L\'app è disponibile in italiano, inglese, francese, spagnolo e tedesco. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; le bandierine nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.',
+    guide_language_body: 'L\'app è disponibile in italiano, inglese, francese, spagnolo e tedesco. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo; le bandierine nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento. Aprendo l\'app con il parametro <code>?lang=</code> nell\'indirizzo (es. <code>?lang=de</code>) si forza una lingua solo per quella apertura.',
     guide_autosave_title: '💾 Salvataggio automatico',
     guide_autosave_body: 'Lo stato della partita viene salvato ad ogni comando, anche se l\'app va in background o si chiude inaspettatamente: alla riapertura si riprende esattamente da dove eri (a cronometro fermo, per sicurezza).',
     close: 'Chiudi',
@@ -334,7 +334,7 @@ const I18N_DICT = {
       '<li>The <strong>bonus</strong> is shown by one dot per team next to the "Fouls" label.</li>' +
       '</ul>',
     guide_language_title: '🌐 Language',
-    guide_language_body: 'The app is available in Italian, English, French, Spanish and German. On first launch, the language is detected automatically from your device; the flags in the ⋯ menu let you choose a specific one at any time.',
+    guide_language_body: 'The app is available in Italian, English, French, Spanish and German. On first launch, the language is detected automatically from your device; the flags in the ⋯ menu let you choose a specific one at any time. Opening the app with the <code>?lang=</code> parameter in the address (e.g. <code>?lang=de</code>) forces a language for that session only.',
     guide_autosave_title: '💾 Automatic saving',
     guide_autosave_body: 'Match state is saved after every action, even if the app goes to the background or closes unexpectedly: reopening it picks up exactly where you left off (with the clock paused, for safety).',
     close: 'Close',
@@ -522,7 +522,7 @@ const I18N_DICT = {
       '<li>Le <strong>bonus</strong> est indiqué par un point par équipe à côté du libellé « Fautes ».</li>' +
       '</ul>',
     guide_language_title: '🌐 Langue',
-    guide_language_body: 'L\'application est disponible en italien, anglais, français, espagnol et allemand. Au premier lancement, la langue est détectée automatiquement à partir de celle de l\'appareil ; les drapeaux dans le menu ⋯ permettent d\'en choisir une spécifique à tout moment.',
+    guide_language_body: 'L\'application est disponible en italien, anglais, français, espagnol et allemand. Au premier lancement, la langue est détectée automatiquement à partir de celle de l\'appareil ; les drapeaux dans le menu ⋯ permettent d\'en choisir une spécifique à tout moment. Ouvrir l\'application avec le paramètre <code>?lang=</code> dans l\'adresse (ex. <code>?lang=de</code>) force une langue pour cette ouverture uniquement.',
     guide_autosave_title: '💾 Sauvegarde automatique',
     guide_autosave_body: 'L\'état du match est enregistré après chaque action, même si l\'application passe en arrière-plan ou se ferme de manière inattendue : à la réouverture, vous reprenez exactement où vous en étiez (chronomètre en pause, par sécurité).',
     close: 'Fermer',
@@ -710,7 +710,7 @@ const I18N_DICT = {
       '<li>El <strong>bonus</strong> se indica con un punto por equipo junto a la etiqueta «Faltas».</li>' +
       '</ul>',
     guide_language_title: '🌐 Idioma',
-    guide_language_body: 'La aplicación está disponible en italiano, inglés, francés, español y alemán. Al abrirla por primera vez, el idioma se detecta automáticamente del dispositivo; las banderas del menú ⋯ permiten elegir uno concreto en cualquier momento.',
+    guide_language_body: 'La aplicación está disponible en italiano, inglés, francés, español y alemán. Al abrirla por primera vez, el idioma se detecta automáticamente del dispositivo; las banderas del menú ⋯ permiten elegir uno concreto en cualquier momento. Al abrir la aplicación con el parámetro <code>?lang=</code> en la dirección (p. ej. <code>?lang=de</code>) se fuerza un idioma solo para esa apertura.',
     guide_autosave_title: '💾 Guardado automático',
     guide_autosave_body: 'El estado del partido se guarda después de cada acción, incluso si la aplicación pasa a segundo plano o se cierra inesperadamente: al reabrirla se retoma exactamente donde lo dejaste (con el cronómetro detenido, por seguridad).',
     close: 'Cerrar',
@@ -898,7 +898,7 @@ const I18N_DICT = {
       '<li>Der <strong>Bonus</strong> wird durch einen Punkt pro Team neben der Beschriftung „Fouls“ angezeigt.</li>' +
       '</ul>',
     guide_language_title: '🌐 Sprache',
-    guide_language_body: 'Die App ist auf Italienisch, Englisch, Französisch, Spanisch und Deutsch verfügbar. Beim ersten Start wird die Sprache automatisch vom Gerät erkannt; über die Flaggen im Menü ⋯ lässt sich jederzeit eine bestimmte Sprache wählen.',
+    guide_language_body: 'Die App ist auf Italienisch, Englisch, Französisch, Spanisch und Deutsch verfügbar. Beim ersten Start wird die Sprache automatisch vom Gerät erkannt; über die Flaggen im Menü ⋯ lässt sich jederzeit eine bestimmte Sprache wählen. Wird die App mit dem Parameter <code>?lang=</code> in der Adresse geöffnet (z. B. <code>?lang=de</code>), gilt diese Sprache nur für diese Öffnung.',
     guide_autosave_title: '💾 Automatisches Speichern',
     guide_autosave_body: 'Der Spielstand wird nach jeder Aktion gespeichert, auch wenn die App in den Hintergrund wechselt oder unerwartet geschlossen wird: Beim erneuten Öffnen geht es genau dort weiter, wo du aufgehört hast (die Uhr steht dabei sicherheitshalber still).',
     close: 'Schließen',
@@ -975,6 +975,18 @@ function i18nDetectSystemLang(){
   return 'en';
 }
 
+/* Override da URL: ?lang=xx forza la lingua per questa sessione/apertura,
+   senza toccare la preferenza salvata. Utile per link diretti e per lo
+   schermo Cast (?display=1&lang=de). Valori non supportati sono ignorati. */
+function i18nUrlLang(){
+  try{
+    const v = new URLSearchParams(location.search).get('lang');
+    if(!v) return null;
+    const base = v.slice(0,2).toLowerCase();
+    return I18N_SUPPORTED.includes(base) ? base : null;
+  }catch(_){ return null; }
+}
+
 function i18nGetPref(){
   try{ return localStorage.getItem(I18N_LANG_KEY) || 'system'; }catch(_){ return 'system'; }
 }
@@ -982,6 +994,8 @@ function i18nSetPref(value){
   try{ localStorage.setItem(I18N_LANG_KEY, value); }catch(_){}
 }
 function i18nGetLang(){
+  const forced = i18nUrlLang();       // priorità massima: parametro URL
+  if(forced) return forced;
   const pref = i18nGetPref();
   if(pref !== 'system' && I18N_SUPPORTED.includes(pref)) return pref;
   return i18nDetectSystemLang();
@@ -1036,6 +1050,7 @@ window.I18N = {
   getLang: i18nGetLang,
   getPref: i18nGetPref,
   setPref: i18nSetPref,
+  urlLang: i18nUrlLang,
   detectSystem: i18nDetectSystemLang,
   supported: I18N_SUPPORTED
 };

@@ -49,6 +49,8 @@ Si usa per **correggere** un errore o preparare la partita prima di iniziare.
 
 L'app è disponibile in **italiano**, **inglese**, **francese**, **spagnolo** e **tedesco**. Alla prima apertura la lingua viene rilevata automaticamente da quella del dispositivo (se non è tra le cinque supportate, parte in inglese); le **bandierine** 🌐🇮🇹🇬🇧🇫🇷🇪🇸🇩🇪 nel menu ⋯ permettono di sceglierne una specifica in qualsiasi momento.
 
+Aprendo l'app con il parametro `?lang=` nell'indirizzo (es. `?lang=de`) si forza una lingua solo per quella apertura, senza modificare la preferenza salvata: utile per link diretti, QR code o per uno schermo in una lingua diversa.
+
 Il **nome delle squadre**, se non personalizzato, segue automaticamente la lingua scelta (es. "Squadra 1" diventa "Team 1" in inglese); un nome scritto a mano resta invece invariato cambiando lingua.
 
 ## 💾 Salvataggio automatico

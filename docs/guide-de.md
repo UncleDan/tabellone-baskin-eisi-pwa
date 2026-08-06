@@ -49,6 +49,8 @@ Hier korrigierst du **einen Fehler** oder bereitest das Spiel vor dem Anpfiff vo
 
 Die App ist auf **Italienisch**, **Englisch**, **Französisch**, **Spanisch** und **Deutsch** verfügbar. Beim ersten Start wird die Sprache automatisch vom Gerät erkannt (wird keine der fünf unterstützt, startet sie auf Englisch); über die **Flaggen** 🌐🇮🇹🇬🇧🇫🇷🇪🇸🇩🇪 im Menü ⋯ lässt sich jederzeit eine bestimmte Sprache wählen.
 
+Wird die App mit dem Parameter `?lang=` in der Adresse geöffnet (z. B. `?lang=de`), gilt diese Sprache nur für diese Öffnung, ohne die gespeicherte Einstellung zu ändern: praktisch für Direktlinks, QR-Codes oder einen Zweitbildschirm in einer anderen Sprache.
+
 Die **Teamnamen** folgen automatisch der gewählten Sprache, solange sie nicht angepasst wurden (z. B. wird aus „Squadra 1“ auf Deutsch „Team 1“); ein selbst eingegebener Name bleibt beim Sprachwechsel unverändert.
 
 ## 💾 Automatisches Speichern

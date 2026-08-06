@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '2026d';
+const APP_VERSION = '2026e';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -1460,6 +1460,15 @@ onActivate($('#langConfirmYes'), ()=>{
   pendingLangChoice = null;
   closeSheet('langConfirmBackdrop');
   saveState();
+  // se la lingua era forzata da ?lang=, togliamo il parametro dall'URL: altrimenti
+  // continuerebbe a vincere sulla scelta appena fatta dall'utente
+  if(I18N.urlLang()){
+    try{
+      const u = new URL(location.href);
+      u.searchParams.delete('lang');
+      history.replaceState(null, '', u.toString());
+    }catch(_){}
+  }
   if(isStandalone()){
     // installata: la chiusura funziona davvero
     try{ window.close(); }catch(e){}
@@ -1478,8 +1487,12 @@ onActivate($('#langConfirmYes'), ()=>{
    che può cambiare la preferenza senza ricaricare la pagina) */
 function updateLangHighlight(){
   document.querySelectorAll('.lang-flag').forEach(b=> b.classList.remove('is-active'));
+  // se la lingua è forzata da ?lang=, evidenziamo quella: è ciò che si sta
+  // effettivamente vedendo, mostrare la preferenza salvata sarebbe fuorviante
+  const forced = I18N.urlLang();
   const pref = I18N.getPref();
-  const active = (pref === 'system' || !I18N.supported.includes(pref)) ? 'system' : pref;
+  const active = forced ? forced
+                        : ((pref === 'system' || !I18N.supported.includes(pref)) ? 'system' : pref);
   const btn = document.querySelector(`.lang-flag[data-lang="${active}"]`);
   if(btn) btn.classList.add('is-active');
 }
