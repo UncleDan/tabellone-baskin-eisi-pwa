@@ -203,8 +203,7 @@ const I18N_DICT = {
     confirm_reset_app: 'Reset applicazione: azzera punteggi, falli, timeout, possesso, nomi e riporta le impostazioni ai valori Baskin. Procedere?',
     confirm_quit: 'Chiudere l\'applicazione?',
     lang_confirm_title: 'Cambiare lingua?',
-    lang_confirm_text: 'L\'app si chiuderà; alla riapertura sarà in {lang}.',
-    lang_confirm_text_browser: 'Chiudi e riapri l\'app per completare il cambio: alla riapertura sarà in {lang}.',
+    lang_confirm_text: 'L\'app passerà a {lang}.',
     lang_confirm_yes: 'Conferma',
     meta_description: 'Tabellone segnapunti per il Baskin: tempo, punti, timeout e bonus. Funziona offline.'
   },
@@ -391,8 +390,7 @@ const I18N_DICT = {
     confirm_reset_app: 'App reset: clears scores, fouls, timeouts, possession, team names and restores Baskin default settings. Proceed?',
     confirm_quit: 'Close the app?',
     lang_confirm_title: 'Change language?',
-    lang_confirm_text: 'The app will close; when you reopen it, it will be in {lang}.',
-    lang_confirm_text_browser: 'Close and reopen the app to complete the change: it will then be in {lang}.',
+    lang_confirm_text: 'The app will switch to {lang}.',
     lang_confirm_yes: 'Confirm',
     meta_description: 'Scoreboard for Baskin: time, points, timeouts and bonus. Works offline.'
   },
@@ -579,8 +577,7 @@ const I18N_DICT = {
     confirm_reset_app: 'Réinitialisation de l\'application : efface scores, fautes, temps morts, possession, noms d\'équipe et restaure les réglages Baskin par défaut. Continuer ?',
     confirm_quit: 'Fermer l\'application ?',
     lang_confirm_title: 'Changer de langue ?',
-    lang_confirm_text: 'L\'application va se fermer ; à la réouverture, elle sera en {lang}.',
-    lang_confirm_text_browser: 'Fermez puis rouvrez l\'application pour terminer le changement : elle sera alors en {lang}.',
+    lang_confirm_text: 'L\'application passera en {lang}.',
     lang_confirm_yes: 'Confirmer',
     meta_description: 'Tableau de marque pour le Baskin : temps, points, temps morts et bonus. Fonctionne hors ligne.'
   },
@@ -767,8 +764,7 @@ const I18N_DICT = {
     confirm_reset_app: 'Reiniciar aplicación: borra puntos, faltas, tiempos muertos, posesión, nombres y restablece los ajustes a los valores Baskin. ¿Continuar?',
     confirm_quit: '¿Cerrar la aplicación?',
     lang_confirm_title: '¿Cambiar de idioma?',
-    lang_confirm_text: 'La aplicación se cerrará; al volver a abrirla estará en {lang}.',
-    lang_confirm_text_browser: 'Cierra y vuelve a abrir la aplicación para completar el cambio: entonces estará en {lang}.',
+    lang_confirm_text: 'La aplicación cambiará a {lang}.',
     lang_confirm_yes: 'Confirmar',
     meta_description: 'Marcador para el Baskin: tiempo, puntos, tiempos muertos y bonus. Funciona sin conexión.'
   },
@@ -955,8 +951,7 @@ const I18N_DICT = {
     confirm_reset_app: 'App zurücksetzen: löscht Punkte, Fouls, Auszeiten, Ballbesitz, Teamnamen und stellt die Baskin-Standardeinstellungen wieder her. Fortfahren?',
     confirm_quit: 'App schließen?',
     lang_confirm_title: 'Sprache wechseln?',
-    lang_confirm_text: 'Die App wird geschlossen; beim erneuten Öffnen ist sie auf {lang}.',
-    lang_confirm_text_browser: 'Schließe die App und öffne sie erneut, um den Wechsel abzuschließen: danach ist sie auf {lang}.',
+    lang_confirm_text: 'Die App wechselt zu {lang}.',
     lang_confirm_yes: 'Bestätigen',
     meta_description: 'Anzeigetafel für Baskin: Zeit, Punkte, Auszeiten und Bonus. Funktioniert offline.'
   }
@@ -1034,7 +1029,10 @@ function applyI18n(){
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
     const key = el.getAttribute('data-i18n-aria');
     const teamN = el.getAttribute('data-i18n-team');
-    const vars = teamN ? { team: t('default_team_name', { n: teamN }) } : undefined;
+    const colorV = el.getAttribute('data-i18n-color');
+    let vars;
+    if(teamN) vars = { team: t('default_team_name', { n: teamN }) };
+    else if(colorV) vars = { color: colorV };
     el.setAttribute('aria-label', t(key, vars));
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{

@@ -295,4 +295,4 @@ Dal menu **…** dell'app è disponibile il link diretto al **repository GitHub*
 ---
 
 **Autore:** Daniele Lolli (UncleDan)  
-**Versione:** 2026e
+**Versione:** 2026f

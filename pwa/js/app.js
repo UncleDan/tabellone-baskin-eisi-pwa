@@ -5,7 +5,7 @@
    ===================================================================== */
 'use strict';
 
-const APP_VERSION = '2026e';
+const APP_VERSION = '2026f';
 const STORE_KEY = 'tabellone-baskin-eisi-v1';
 
 /* Modalità "sola visualizzazione": attivata con ?display=1 nell'URL.
@@ -448,6 +448,10 @@ const colorRows = [];
     sw.className = 'swatch';
     sw.style.background = col;
     sw.dataset.color = col.toLowerCase();
+    // marcatori i18n: così applyI18n() li ritraduce a ogni cambio lingua,
+    // senza bisogno di codice dedicato che rischierebbe di restare indietro
+    sw.setAttribute('data-i18n-aria', 'color_label');
+    sw.setAttribute('data-i18n-color', col);
     sw.setAttribute('aria-label', t('color_label', {color: col}));
     sw.addEventListener('click', ()=> setTeamColor(i, col));
     row.appendChild(sw);
@@ -455,6 +459,7 @@ const colorRows = [];
   const custom = document.createElement('input');
   custom.type = 'color';
   custom.className = 'swatch custom';
+  custom.setAttribute('data-i18n-aria', 'color_custom');
   custom.setAttribute('aria-label', t('color_custom'));
   custom.addEventListener('input', ()=> setTeamColor(i, custom.value));
   row.appendChild(custom);
@@ -1437,11 +1442,10 @@ document.querySelectorAll('.lang-flag').forEach(btn=>{
     const choice = btn.dataset.lang;                 // 'system' | 'it' | 'en' | 'fr' | 'es' | 'de'
     const resolvedLang = (choice === 'system') ? I18N.detectSystem() : choice;
     const langName = I18N.tFor(resolvedLang, 'lang_name');
-    const textKey = isStandalone() ? 'lang_confirm_text' : 'lang_confirm_text_browser';
     pendingLangChoice = choice;
     $('#langConfirmDialog').setAttribute('aria-label', I18N.tFor(resolvedLang, 'lang_confirm_title'));
     $('#langConfirmTitle').textContent = I18N.tFor(resolvedLang, 'lang_confirm_title');
-    $('#langConfirmText').textContent = I18N.tFor(resolvedLang, textKey, {lang: langName});
+    $('#langConfirmText').textContent = I18N.tFor(resolvedLang, 'lang_confirm_text', {lang: langName});
     $('#langConfirmYes').textContent = I18N.tFor(resolvedLang, 'lang_confirm_yes');
     $('#langConfirmCancel').textContent = I18N.tFor(resolvedLang, 'cancel');
     closeSheet('moreBackdrop');
@@ -1469,18 +1473,13 @@ onActivate($('#langConfirmYes'), ()=>{
       history.replaceState(null, '', u.toString());
     }catch(_){}
   }
-  if(isStandalone()){
-    // installata: la chiusura funziona davvero
-    try{ window.close(); }catch(e){}
-    setTimeout(()=>{ toast(t('toast_quit_hint')); }, 300);
-  } else {
-    // nel browser window.close() viene bloccato: applichiamo subito la nuova
-    // lingua all'interfaccia e lasciamo all'utente il consiglio già letto
-    // nella conferma (chiudere e riaprire per un caricamento pulito)
-    applyI18n();
-    renderAll();
-    updateLangHighlight();
-  }
+  // Cambio in diretta, senza ricaricare né chiudere l'app: applyI18n() ritraduce
+  // tutto il testo statico (compresi gli aria-label generati da JS, marcati con
+  // data-i18n-aria) e renderAll() ridisegna nomi squadra e indicatori.
+  applyI18n();
+  renderAll();
+  updateLangHighlight();
+  toast(t('toast_settings_saved'));
 });
 /* evidenzia la bandiera/lingua attualmente attiva (richiamata anche ad ogni
    apertura del menu, non solo all'avvio: es. dopo un reset applicazione,
