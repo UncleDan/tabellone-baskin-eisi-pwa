@@ -1,5 +1,5 @@
 /* =====================================================================
-   Service worker - Tabellone Baskin EISI
+   Service worker - Tabellone Baskin EISI (PWA)
    Cache-first per il funzionamento completamente offline.
 
    Se l'app è aperta nel browser normale (non installata), app.js chiede
@@ -14,12 +14,13 @@
    Aggiornare CACHE_NAME ad ogni rilascio: serve sia a invalidare la vecchia
    cache sia a far dichiarare al file la propria versione.
    ===================================================================== */
-const CACHE_NAME = 'tabellone-baskin-eisi-v1.17.7';
+const CACHE_NAME = 'tabellone-baskin-eisi-v2026g';
 
 const ASSETS = [
   './',
   './index.html',
   './css/styles.css',
+  './js/i18n.js',
   './js/app.js',
   './manifest.webmanifest',
   './sounds/horn.wav',
